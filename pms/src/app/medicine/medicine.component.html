@@ -1,0 +1,24 @@
+<p>medicine works!</p>
+<div class="grid-table">
+    <div class="thead">
+        
+      <div class="tr">
+
+            <div class="td">Med name</div>
+            <div class="td"> Med Id</div>
+        </div>
+    </div>
+
+    <div class="tbody">
+        <form class="tr" *ngFor="let fb of medicineForms.controls" >
+
+            <div class="td">
+                <input class="form-control" formControlName = "medId">
+            </div>
+            <div class="td">
+                <input class="form-control" formControlName = "medName">
+            </div>
+        </form>
+
+    </div> 
+</div>

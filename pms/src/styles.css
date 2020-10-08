@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+.grid-table{
+    display: table;
+}
+
+.thead{
+    display: table-header-group;
+    font-weight: bold;
+    border-bottom: 1[x solid black];
+    text-align: center;
+    background-color: blanchedalmond;
+}
+
+.tbody{
+    display: table-row-group
+}
+
+.tr{
+    display: table-row
+}
+
+.td{
+    display: table-cell;
+    padding: 10px 1px 1px 5px;
+}

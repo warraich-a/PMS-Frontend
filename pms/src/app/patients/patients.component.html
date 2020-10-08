@@ -1,0 +1,22 @@
+<div class="container p-3 my-3 border">
+  <h1>Patients</h1>
+  <!-- <button id="buttonAdd" (click)="CreateExperience()">+</button> -->
+  
+  <table class="table table-striped">
+      <thead>
+          <tr>
+              <th>Patient Name</th>
+              <th>Disease</th>
+          </tr>
+      </thead>
+      <tbody>
+
+        <tr id="test"  *ngFor="let patient of pts">
+          <td>{{patient.name}}</td>
+          <td>{{patient.disease}}</td>
+        </tr>
+        
+        
+      </tbody>
+  </table>
+</div>
