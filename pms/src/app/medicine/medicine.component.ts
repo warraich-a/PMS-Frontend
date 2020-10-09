@@ -1,8 +1,9 @@
+import { MedicineService } from './../services/medicine/medicine.service';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { FormBuilder, FormArray } from '@angular/forms';
 
-export interface Patients{
+export interface Medicine{
   name:string;
   id:number;
   disease:string;
@@ -14,19 +15,16 @@ export interface Patients{
 })
 export class MedicineComponent implements OnInit {
  
-  medicineForms : FormArray = this.fb.array([]);
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private medicineServices: MedicineService) { }
 
  
-  ngOnInit(){
-    this.addMedForm();
+  medicines: Object[];
+  ngOnInit(): void{
+    this.medicineServices.getMedicines().subscribe((data)=>{
+      console.log(data);
+      this.medicines = <object[]>data;
+    });
+    
   }
-  
-addMedForm(){
-  this.medicineForms.push(this.fb.group({
-    medId : [0],
-    medName: [''],  
-  }))
-}
 }

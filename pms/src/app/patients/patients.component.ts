@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
+import { PatientService } from '../services/patient/patient.service';
 
 export interface Patients{
   name:string;
@@ -16,13 +17,13 @@ export interface Patients{
 
 export class PatientsComponent implements OnInit {
 
-  constructor(private apiService: ApiService) { }
+  constructor(private patientService: PatientService) { }
 
-  pts: Patients[];
+  pts: Object[];
   ngOnInit(): void {
-    this.apiService.getPatients().subscribe((data)=>{
+    this.patientService.getPatients().subscribe((data)=>{
       console.log(data);
-      this.pts =<Patients[]>data;
+      this.pts =<Object[]>data;
     });
   }
 

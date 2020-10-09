@@ -9,12 +9,6 @@ export class ApiService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getPatients(){
-    return this.httpClient.get(`http://localhost:9090/pharmacist/patients`);
-  }
 
-  public getPharmacists(){
-    return this.httpClient.get(`http://localhost:9090/pharmacist`);
-  }
   
 }

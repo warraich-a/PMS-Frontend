@@ -21,9 +21,9 @@ export class PharmacistComponent implements OnInit {
 
   pharmacists: Pharmacist[];
   ngOnInit(): void {
-    this.apiService.getPharmacists().subscribe((pharmacistData)=>{
-      console.log(pharmacistData);
-      this.pharmacists =<Pharmacist[]>pharmacistData;
-    });
+    // this.apiService.getPharmacists().subscribe((pharmacistData)=>{
+    //   console.log(pharmacistData);
+    //   this.pharmacists =<Pharmacist[]>pharmacistData;
+    // });
   }
 }
