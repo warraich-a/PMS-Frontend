@@ -3,7 +3,7 @@
   <h1>Patients</h1>
   <!-- <button id="buttonAdd" (click)="CreateExperience()">+</button> -->
   
-  <table class="table table-striped">
+  <table class="table table-hover">
       <thead>
           <tr>
               <th>First Name</th>
@@ -15,8 +15,8 @@
       </thead>
       <tbody>
 
-        <tr id="test"  *ngFor="let patient of pts">
-          <td>{{patient.firstName}}</td>
+        <tr id="test"  *ngFor="let patient of pts" (click)="getPatientData(patient.id)" data-toggle="modal" data-target="#addProfileModal" > 
+          <td>{{patient.id}}</td>
           <td>{{patient.lastName}}</td>
           <td>{{patient.email}}</td>
           <td>{{patient.disease}}</td>
@@ -29,6 +29,63 @@
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">
   Launch demo modal
 </button>
+
+
+<!-- <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#addProfileModal" id="buttonAdd">Add New Profile</button> -->
+  <br><br><br>
+  <div class="modal fade" id="addProfileModal">
+      <div class="modal-dialog">
+      <div class="modal-content">
+      
+          <!-- Modal Header -->
+          <div class="modal-header">
+          <h4 class="modal-title">Add Profile</h4>
+          <button 
+              type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          
+          <!-- Modal body -->
+          <div class="modal-body"> 
+                <!-- here this hastag is used to create a new variable which takes the whole form and then that value is  
+                used to send the data in onSubmitExperience which is created it in profile.component.ts-->
+
+                <table class="table table-striped" >
+                  <thead>
+          
+                  </thead>
+                  <tbody >
+                    <tr id="test"  *ngFor="let p of patient">
+                      
+                      <td class="font-italic"> <h3>{{p.id}} </h3> 
+                        {{p.lastName}} <br>
+                        {{p.email}} <br>
+                        {{p.disease}} <br>
+                      {{p.dateOfBirth}}</td>
+          
+                    </tr>
+
+                    <tr id="test"  *ngFor="let p of medicines">
+                      
+                      <td class="font-italic"> <h3>{{p.id}} </h3> 
+                        {{p.medName}} <br>
+                        {{p.price}} <br>
+                        {{p.sellingPrice}} <br>
+                      </td>
+          
+                    </tr>
+                    
+                  </tbody>
+              </table>
+               
+          </div>
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>           
+              </div>
+          </div>
+      </div>
+  </div>
+  
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

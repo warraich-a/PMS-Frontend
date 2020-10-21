@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms"
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,6 +13,7 @@ import { PharmacistComponent } from './pharmacist/pharmacist.component';
 import { MedicineComponent } from './medicine/medicine.component';
 import { LoginComponent } from './login/login.component';
 import { from } from 'rxjs';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // below we are mentioning that this is an ngmodule just like in components we tell 
 // it about the type of class above the export
@@ -27,7 +30,9 @@ import { from } from 'rxjs';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSnackBarModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

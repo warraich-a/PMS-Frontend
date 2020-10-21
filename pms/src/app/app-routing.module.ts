@@ -8,6 +8,7 @@ const routes: Routes = [
 
   {path:'pharmacist', component: PharmacistComponent},
   {path:'pharmacist/patients', component: PatientsComponent},
+  {path:'pharmacist/patients/:patientId', component: PatientsComponent},
   {path:'pharmacist/medicines', component: MedicineComponent}
 ];
 
