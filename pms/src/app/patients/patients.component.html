@@ -56,34 +56,72 @@
                   <tbody >
                     <tr id="test"  *ngFor="let p of patient">
                       
-                      <td class="font-italic"> <h3>{{p.id}} </h3> 
-                        {{p.lastName}} <br>
+                      <td class="font-italic">
+                        <h3>{{p.firstName}} {{p.lastName}}  </h3> 
+                        <label> Email </label> 
                         {{p.email}} <br>
+
+                         <label>Reason of sickness</label> 
                         {{p.disease}} <br>
+                        <label>Date of birth</label>
                       {{p.dateOfBirth}}</td>
           
                     </tr>
-
-                    <tr id="test"  *ngFor="let p of medicines">
-                      
-                      <td class="font-italic"> <h3>{{p.id}} </h3> 
-                        {{p.medName}} <br>
-                        {{p.price}} <br>
-                        {{p.sellingPrice}} <br>
-                      </td>
-          
-                    </tr>
-                    
                   </tbody>
               </table>
-               
+              <mat-divider></mat-divider>
+              <div *ngIf="medicines?.length > 0; else noMedicines"> 
+                <h3>Prescribed Medicines</h3>
+                <table class="table table-striped" >
+                  <thead>
+                    <tr>
+                      <th>Medicine </th>
+                      <th>Price</th>
+                    </tr>
+                  </thead>
+                  <tbody >
+                    <tr class="test"  *ngFor="let p of medicines" [ngClass]="{'medicines' : true}">
+                      <td> {{p.medName}} </td> 
+                      <td>{{p.price}}  </td>  
+                        <button class="btn btn-danger float-right" id="">{{p.id}}</button>
+                    </tr>
+                  </tbody>
+               </table>
+            </div>
+            <ng-template #noMedicines>
+              <p>There are no medicines prescribed yet</p>
+            </ng-template>
+            <mat-divider></mat-divider>   
+            <h3>Prescribe new medicine</h3>  
+            <br><br>      
+            <form class="text-left" #medicineToAdd="ngForm" (ngSubmit)="addMedicineToPatient(medicineToAdd.value)">
+              <div class="form-group">
+
+                <select name="medicineId" ngModel>
+                  <option value="" disabled>Choose a medicine</option>
+                  <option *ngFor="let m of allMedicines" [ngValue]="m.id">
+                    {{ m.medName }}
+                  </option>
+                </select>
+                
+               </div>
+               <button 
+                   mdbBtn 
+                   type="submit"  
+                   color="success" 
+                   rounded="true" 
+                   id="submitButton" 
+                   onclick="$('.modal').modal('hide')&&$('.modal-backdrop').hide()" > submit
+               </button>
+           </form>
+          </div>
+              
           </div>
               <!-- Modal footer -->
               <div class="modal-footer">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>           
               </div>
           </div>
-      </div>
   </div>
   
 
@@ -137,4 +175,5 @@
   </div>
 </div>
 
+<!-- <button (click)="addMedicineToPatient()">Add</button> -->
 </div>

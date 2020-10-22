@@ -29,13 +29,16 @@ export class PatientsComponent implements OnInit {
   pts: Object[];
   patient: Object[];
   medicines: Object[];
+  allMedicines:  Object[];
   patientId: number;
+  medicineToAdd: {}
+  medicineId : number;
+  patientIdToAddMed :number;
+  courses: [];
   constructor(private patientService: PatientService,
               private _snackBar: MatSnackBar,
               private route: ActivatedRoute) { }
 
-         
-              
   openSnackBar() {
     this._snackBar.open('Cannonball!!', 'End now', {
       duration: 1000,
@@ -48,7 +51,9 @@ export class PatientsComponent implements OnInit {
   getPatientData(id){
     this.patientService.getPatientById(id).subscribe((result)=>{
       this.patient =<Object[]>result;
-      console.log(id);
+      this.patientIdToAddMed = id;
+      console.log("patient id -------");
+      console.log(this.patientIdToAddMed);
     });
     this.patientService.getMedicineByPatientId(id).subscribe((data)=>{
 
@@ -56,6 +61,24 @@ export class PatientsComponent implements OnInit {
       console.log(this.medicines);
       
     });
+    
+    this.patientService.getMedicines().subscribe((data)=>{
+      console.log(data);
+      this.allMedicines =<Object[]>data;
+    });
+
+  } 
+
+  addMedicineToPatient(data){
+    console.log("here");
+    console.log(data.medicineId);
+    this.medicineToAdd = {
+        "medicineId": data.medicineId,
+        "patientId": this.patientIdToAddMed
+    };
+    
+    this.patientService.addMedicineToPatient(<JSON>this.medicineToAdd);
+    
   }
   ngOnInit(): void {
 
@@ -67,6 +90,10 @@ export class PatientsComponent implements OnInit {
       console.log(data);
       this.pts =<Object[]>data;
     });
+
+   
+
+
    
     
   }

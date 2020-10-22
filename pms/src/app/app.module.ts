@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms"
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDividerModule} from '@angular/material/divider';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -30,8 +33,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    MatSelectModule,
+    MDBBootstrapModule.forRoot(),
     ReactiveFormsModule,
     MatSnackBarModule,
+    MatDividerModule,
     BrowserAnimationsModule
   ],
   providers: [],

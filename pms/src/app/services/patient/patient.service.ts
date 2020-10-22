@@ -25,5 +25,14 @@ export class PatientService {
   public getMedicineByPatientId(id){
     return this.httpClient.get(`http://localhost:9090/pharmacist/medicines/`+id);
   }
-  
+  public addMedicineToPatient(data){
+    return this.httpClient.post('http://localhost:9090/pharmacist/patient/medicine', data).toPromise().then(data => {
+      console.log(data);
+    })
+  }
+ 
+  public getMedicines(){
+    return this.httpClient.get(`http://localhost:9090/pharmacist/medicines`);
+  }
+
 }
