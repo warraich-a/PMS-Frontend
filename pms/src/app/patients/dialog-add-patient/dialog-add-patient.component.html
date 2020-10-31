@@ -1,0 +1,95 @@
+<div class="container h-100 d-flex justify-content-center">
+<form 
+          class="text-center border border-silver"
+          #addPatient="ngForm"
+          (ngSubmit)="onSubmitPatient(addPatient.value)">
+          <h1>Add Medicine</h1>
+
+           
+
+          <br>
+          <mat-form-field 
+                class="input-full-width" >
+                <input matInput type="text" 
+                name="firstName" 
+                ngModel 
+                placeholder="firstName"> 
+          </mat-form-field>
+          <br>
+          <mat-form-field 
+                class="input-full-width" >
+                <input matInput type="text" 
+                name="lastName" 
+                ngModel 
+                placeholder="lastName"> 
+          </mat-form-field>
+          <br>
+          <mat-form-field 
+                class="input-full-width" >
+                <input matInput type="text" 
+                name="email" 
+                ngModel 
+                placeholder="email"> 
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
+            <mat-label>Year</mat-label>
+            <mat-select name="year" ngModel>
+                <mat-option value="" disabled>Choose a year</mat-option>
+                <mat-option *ngFor = "let l of years" [value]="l.year">
+                    {{l.year}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+     
+        <mat-form-field appearance="fill">
+            <mat-label>Month</mat-label>
+            <mat-select name="month" ngModel>
+                <mat-option value="" disabled>Choose a month</mat-option>
+                <mat-option *ngFor = "let l of months" [value]="l.month">
+                    {{l.month}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+      
+
+        <mat-form-field appearance="fill">
+            <mat-label>Day</mat-label>
+            <mat-select name="day" ngModel>
+                <mat-option value="" disabled>Choose a day</mat-option>
+                <mat-option *ngFor = "let l of days" [value]="l.day">
+                    {{l.day}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br>
+          <mat-form-field 
+                class="input-full-width" >
+                <input matInput type="text" 
+                name="password" 
+                ngModel 
+                placeholder="password"> 
+          </mat-form-field>
+          <br>
+          <mat-form-field 
+                class="input-full-width" >
+                <input matInput type="text" 
+                name="disease" 
+                ngModel 
+                placeholder="disease"> 
+        </mat-form-field>
+        <br>
+            
+
+          
+          <button 
+                mdbBtn 
+                type="submit"  
+                rounded="true" 
+                class="btn btn-success"
+                id="submitButton" > submit
+          </button>
+          <button type="button" class="btn btn-danger" (click)="CloseDialog()">Close</button>   
+        </form>
+</div>

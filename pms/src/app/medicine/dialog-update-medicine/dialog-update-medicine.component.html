@@ -1,0 +1,32 @@
+
+<div class="container h-100 d-flex justify-content-center">
+    <form (ngSubmit)="updateMedicine(medicineForm.value)" #medicineForm="ngForm">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 >Edit the Medicine</h2>
+    </div>
+    
+    <div class="row mt-3">
+        <div class="col-md-12"><label class="labels" >Medicine Name</label>
+            <input type="text" class="form-control" id="medName"
+            required
+            ngModel="{{medicine.medName}}" name="medName"
+            #medName="ngModel">
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-12"><label class="labels">Price</label>
+            <input type="text" class="form-control" id="price"
+            required
+            ngModel="{{medicine.price}}" name="price"
+            #price="ngModel">
+        </div>
+        <div class="col-md-12"><label class="labels">Field of study</label>
+            <input type="text" class="form-control" id="sellingPrice"
+            required
+            ngModel="{{medicine.sellingPrice}}" name="sellingPrice"
+            #sellingPrice="ngModel">
+        </div>
+    </div>
+    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" >Save Medicine</button></div>
+
+</form>

@@ -8,6 +8,8 @@ import {
 } from '@angular/material/snack-bar';
 import {FormControl} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogAddPatientComponent } from './dialog-add-patient/dialog-add-patient.component';
 
 export interface Patients{
   name:string;
@@ -37,7 +39,8 @@ export class PatientsComponent implements OnInit {
   courses: [];
   constructor(private patientService: PatientService,
               private _snackBar: MatSnackBar,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              public dialog: MatDialog) { }
 
   openSnackBar() {
     this._snackBar.open('Cannonball!!', 'End now', {
@@ -80,16 +83,31 @@ export class PatientsComponent implements OnInit {
     this.patientService.addMedicineToPatient(<JSON>this.medicineToAdd);
     
   }
+  openDialogAddPatient(): void {
+    const dialogRef = this.dialog.open(DialogAddPatientComponent, {
+      width: '50%',
+      panelClass: 'custom-modalbox'
+    }); 
+    dialogRef.afterClosed()
+      .subscribe(res => {
+        this.getAllPatients();
+        this.ngOnInit();
+    });
+  }
+
+  getAllPatients(){
+    this.patientService.getPatients().subscribe((data)=>{
+      console.log(data);
+      this.pts =<Object[]>data;
+    });
+  }
   ngOnInit(): void {
 
     this.patientId = +this.route.snapshot.paramMap.get('patientId');
    // this.openSnackBar();
 
 
-    this.patientService.getPatients().subscribe((data)=>{
-      console.log(data);
-      this.pts =<Object[]>data;
-    });
+   this.getAllPatients();
 
    
 

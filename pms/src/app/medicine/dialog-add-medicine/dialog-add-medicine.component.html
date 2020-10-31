@@ -1,0 +1,43 @@
+<form 
+          class="text-center border border-silver"
+          #addMedicine="ngForm"
+          (ngSubmit)="onSubmitMedicine(addMedicine.value)">
+          <h1>Add Medicine</h1>
+          <div class="form-group">          
+            <mat-form-field class="input-full-width" >
+                <input matInput type="text" 
+                name="medicine" 
+                ngModel 
+                placeholder="Medicine"> 
+            </mat-form-field><br>
+          <br>
+         
+          <mat-form-field 
+                class="input-full-width" >
+                <input matInput type="text" 
+                name="price" 
+                ngModel 
+                placeholder="Price"> 
+          </mat-form-field>
+          <br>
+
+          <mat-form-field 
+                class="input-full-width" >
+                <input matInput type="text" 
+                name="sellingPrice" 
+                ngModel 
+                placeholder="Selling Price"> 
+          </mat-form-field>
+          <br>
+          
+
+          </div>
+          <button 
+                mdbBtn 
+                type="submit"  
+                rounded="true" 
+                class="btn btn-success"
+                id="submitButton" > submit
+          </button>
+          <button type="button" class="btn btn-danger" (click)="CloseDialog()">Close</button>   
+        </form>

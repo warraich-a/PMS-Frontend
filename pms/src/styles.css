@@ -1,29 +1,68 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import '~bootstrap/dist/css/bootstrap.min.css';
-.grid-table{
-    display: table;
+@import "~bootstrap/dist/css/bootstrap.min.css";
+.grid-table {
+  display: table;
 }
 
-.thead{
-    display: table-header-group;
-    font-weight: bold;
-    border-bottom: 1[x solid black];
-    text-align: center;
-    background-color: blanchedalmond;
+.thead {
+  display: table-header-group;
+  font-weight: bold;
+  border-bottom: 1[x solid black];
+  text-align: center;
+  background-color: blanchedalmond;
 }
 
-.tbody{
-    display: table-row-group
+.tbody {
+  display: table-row-group;
 }
 
-.tr{
-    display: table-row
+.tr {
+  display: table-row;
 }
 
-.td{
-    display: table-cell;
-    padding: 10px 1px 1px 5px;
+.td {
+  display: table-cell;
+  padding: 10px 1px 1px 5px;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+input {
+  color: black;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.custom-modalbox > mat-dialog-container {
+  padding: 0px;
+  color: aliceblue;
+}
