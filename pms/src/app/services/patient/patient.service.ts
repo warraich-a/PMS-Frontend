@@ -28,6 +28,26 @@ export class PatientService {
       this.errorHandler(error);
     });
   }
+  public updatePatients(data){
+    return this.httpClient.put(`http://localhost:9090/pharmacist/patient`, data).subscribe((data)=>
+    { 
+      
+    },
+    (error: Response) => {
+      this.errorHandler(error);
+    });
+  }
+  public deletePatient(id){
+    return this.httpClient.delete('http://localhost:9090/pharmacist/patient/' + id + '/delete/').subscribe((data)=>
+    { 
+      
+    },
+    (error: Response) => {
+      this.errorHandler(error);
+    });
+  }
+  
+  
   public getPharmacists(){
     return this.httpClient.get(`http://localhost:9090/pharmacist`);
   }

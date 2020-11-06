@@ -24,6 +24,9 @@ import { DialogDeleteMedicineComponent } from './medicine/dialog-delete-medicine
 import {MatIconModule} from '@angular/material/icon';
 import { DialogUpdateMedicineComponent } from './medicine/dialog-update-medicine/dialog-update-medicine.component';
 import { DialogAddPatientComponent } from './patients/dialog-add-patient/dialog-add-patient.component';
+import { DialogUpdatePatientComponent } from './patients/dialog-update-patient/dialog-update-patient.component';
+import { DialogDeletePatientComponent } from './patients/dialog-delete-patient/dialog-delete-patient.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 // below we are mentioning that this is an ngmodule just like in components we tell 
 // it about the type of class above the export
@@ -37,7 +40,9 @@ import { DialogAddPatientComponent } from './patients/dialog-add-patient/dialog-
     DialogAddMedicineComponent,
     DialogDeleteMedicineComponent,
     DialogUpdateMedicineComponent,
-    DialogAddPatientComponent 
+    DialogAddPatientComponent,
+    DialogUpdatePatientComponent,
+    DialogDeletePatientComponent 
   ],
   imports: [
     BrowserModule,
@@ -53,6 +58,7 @@ import { DialogAddPatientComponent } from './patients/dialog-add-patient/dialog-
     MatButtonModule,
     MatDialogModule,
     MatIconModule,
+    MatTooltipModule,
     BrowserAnimationsModule
   ],
   providers: [],

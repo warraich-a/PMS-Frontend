@@ -1,56 +1,54 @@
-
 <form 
 class="text-center"
-#addPatient="ngForm"
-(ngSubmit)="onSubmitPatient(addPatient.value)">
-
+#updatePatient="ngForm"
+(ngSubmit)="onSubmitPatient(updatePatient.value)">
+<!-- <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 >Edit the Patient</h2>
+</div> -->
     <div class="container-left">
-          <h1>Add Patient</h1>
+        <h1 >Edit the Patient</h1>
           <mat-form-field   
                 class="input-full-width">
                 <input matInput type="text" 
                 name="firstName" 
-                ngModel 
+                disabled
+                ngModel = " {{patient.firstName}}"
+                #firstName = "ngModel"
                 placeholder="First Name"> 
           </mat-form-field>
           <mat-form-field 
                 class="input-full-width" >
                 <input matInput type="text" 
                 name="lastName" 
-                ngModel 
+                disabled
+                ngModel = "{{patient.lastName}}"
+                #lastName = "ngModel"
                 placeholder="Last Name"> 
           </mat-form-field>
           <mat-form-field 
             class="input-full-width">
-            <mat-label>Year</mat-label>
-            <mat-select name="year" ngModel>
-                <mat-option value="" disabled>Choose a year</mat-option>
-                <mat-option *ngFor = "let l of years" [value]="l.year">
-                    {{l.year}}
-                </mat-option>
-            </mat-select>
+            <input matInput type="text" 
+                name="year" 
+                ngModel = "{{patient.year}}"
+                #month = "ngModel"
+                disabled>
         </mat-form-field>
         <mat-form-field 
         class="input-full-width">
-            <mat-label>Month</mat-label>
-            <mat-select name="month" ngModel>
-                <mat-option value="" disabled>Choose a month</mat-option>
-                <mat-option *ngFor = "let l of months" [value]="l.month">
-                    {{l.month}}
-                </mat-option>
-            </mat-select>
+                <input matInput type="text" 
+                name="month" 
+                ngModel = "{{patient.month}}"
+                #month = "ngModel"
+                disabled>
         </mat-form-field>
-      <br>
-
         <mat-form-field 
         class="input-full-width">
-            <mat-label>Day</mat-label>
-            <mat-select name="day" ngModel>
-                <mat-option value="" disabled>Choose a day</mat-option>
-                <mat-option *ngFor = "let l of days" [value]="l.day">
-                    {{l.day}}
-                </mat-option>
-            </mat-select>
+                <input matInput type="text" 
+                name="day" 
+                ngModel = "{{patient.day}}"
+                #day = "ngModel"
+                disabled
+                placeholder="Day">
         </mat-form-field>
         
         <h4>Sickness</h4>
@@ -58,19 +56,22 @@ class="text-center"
               class="input-full-width" >
               <input matInput type="text" 
               name="disease" 
-              ngModel 
+              ngModel = "{{patient.disease}}"
+                #disease = "ngModel"
+                placeholder="Sickness"
               placeholder="What is the sickness?"> 
       </mat-form-field>
        
             
     </div>
     <div class="container-right">
-    <h1>Adresss</h1>
+    <h4>Adresss</h4>
         <mat-form-field 
                 class="input-full-width" >
                 <input matInput type="text" 
                 name="streetName" 
-                ngModel 
+                ngModel = "{{patient.streetName}}"
+                #streetName = "ngModel"
                 placeholder="Street Name"> 
           </mat-form-field>
         
@@ -78,38 +79,43 @@ class="text-center"
                 class="input-full-width" >
                 <input matInput type="text" 
                 name="houseNr" 
-                ngModel 
-                placeholder="House Number"> 
+                ngModel = "{{patient.houseNr}}"
+                #houseNr = "ngModel"
+                placeholder="houseNr"> 
           </mat-form-field>
           <mat-form-field 
                 class="input-full-width" >
                 <input matInput type="text" 
                 name="city" 
-                ngModel 
-                placeholder="City"> 
+                ngModel = "{{patient.city}}"
+                #city = "ngModel"
+                placeholder="city"> 
           </mat-form-field>
           <mat-form-field 
                 class="input-full-width" >
                 <input matInput type="text" 
                 name="zipcode" 
-                ngModel 
-                placeholder="Zipcode"> 
+                ngModel = "{{patient.zipcode}}"
+                #zipcode = "ngModel"
+                placeholder="zipcode"> 
           </mat-form-field>
 
-          <h3>Credentials</h3>
+          <h4>Credentials</h4>
           <mat-form-field 
                   class="input-full-width" >
                   <input matInput type="text" 
                   name="email" 
-                  ngModel 
-                  placeholder="email"> 
+                  ngModel = "{{patient.email}}"
+                #email = "ngModel"
+                placeholder="email"> 
             </mat-form-field>
             <br>
             <mat-form-field 
                   class="input-full-width" >
                   <input matInput type="text" 
                   name="password" 
-                  ngModel 
+                  ngModel = "{{patient.password}}"
+                  #password = "ngModel"
                   placeholder="password"> 
             </mat-form-field>
             <button 
@@ -128,6 +134,7 @@ class="text-center"
             </button>  
            
     </div>  
+
         
 </form>
 

@@ -63,6 +63,19 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 .custom-modalbox > mat-dialog-container {
-  padding: 0px;
-  color: aliceblue;
+  /* padding: 0px; */
+  color: white;
+  /* width: 100%; */
+
+  /* background-color: #; */
+}
+
+@media screen and (max-width: 600px) {
+  .custom-modalbox > mat-dialog-container {
+    /* padding: 0px; */
+    color: white;
+    width: 100%;
+
+    /* background-color: #; */
+  }
 }

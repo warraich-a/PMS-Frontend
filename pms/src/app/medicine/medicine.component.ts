@@ -1,3 +1,4 @@
+import { fade } from './../animation/fade';
 import { DialogUpdateMedicineComponent } from './dialog-update-medicine/dialog-update-medicine.component';
 import { DialogDeleteMedicineComponent } from './dialog-delete-medicine/dialog-delete-medicine.component';
 import { MedicineService } from './../services/medicine/medicine.service';
@@ -12,7 +13,10 @@ import { Medicine } from '../classes/Medicine';
 @Component({
   selector: 'app-medicine',
   templateUrl: './medicine.component.html',
-  styleUrls: ['./medicine.component.css']
+  styleUrls: ['./medicine.component.css'],
+  animations: [
+   fade
+  ]
 })
 export class MedicineComponent implements OnInit {
  
@@ -22,7 +26,7 @@ export class MedicineComponent implements OnInit {
 
  openDialogMedicine(): void {
   const dialogRef = this.dialog.open(DialogAddMedicineComponent, {
-    width: '30%',
+    // width: '30%',
     panelClass: 'custom-modalbox'
   }); 
   dialogRef.afterClosed()
@@ -41,9 +45,9 @@ export class MedicineComponent implements OnInit {
   
   openDialogDelete(id): void {
     const dialogRef = this.dialog.open(DialogDeleteMedicineComponent, {
-      width: '30%',
-      data: {Medicine: id}
-      // panelClass: 'custom-modalbox'
+      // width: '30%',
+      data: {Medicine: id},
+      panelClass: 'custom-modalbox'
     }); 
     dialogRef.afterClosed()
       .subscribe(res => {
@@ -55,8 +59,8 @@ export class MedicineComponent implements OnInit {
   openDialogUpdate(medicine: Medicine): void {
     const dialogRef = this.dialog.open(DialogUpdateMedicineComponent, {
       width: '40%',
-      data: {medicine: medicine}
-      // panelClass: 'custom-modalbox'
+      data: {medicine: medicine},
+       panelClass: 'custom-modalbox'
     }); 
     dialogRef.afterClosed()
       .subscribe(res => {

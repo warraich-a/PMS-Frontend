@@ -1,15 +1,20 @@
 
+<div class="container p-3 my-3 border" style="background-color: black;">
+ 
+</div>
 <div class="container p-3 my-3 border">
   <button
+  [@bounce]="bounce"
     class="btn btn-success float-right" 
    (click)="openDialogAddPatient()">
     Add New Patient
   </button>
-<div class="container p-3 my-3 border">
   <h1>Patients</h1>
   <!-- <button id="buttonAdd" (click)="CreateExperience()">+</button> -->
 
-  <table class="table table-hover">
+  <br><br>
+  <mat-divider style="background-color: black;"></mat-divider>
+  <table class="table table-hover table-striped table-responsive-lg">
     <thead>
       <tr>
         <th>First Name</th>
@@ -21,14 +26,23 @@
     </thead>
     <tbody>
 
-      <tr id="test" *ngFor="let patient of pts"
-        (click)="getPatientData(patient.id)" data-toggle="modal"
-        data-target="#addProfileModal">
-        <td>{{patient.firstName}}</td>
+      <!-- @slideInOut -->
+      <tr id="test" 
+      *ngFor="let patient of pts" 
+      matTooltip="Click on the first name to see the details">
+        <td (click)="getPatientData(patient.id)" data-toggle="modal"
+        data-target="#patientModel" style="cursor: pointer;">{{patient.firstName}}</td>
         <td>{{patient.lastName}}</td>
         <td>{{patient.email}}</td>
         <td>{{patient.disease}}</td>
         <td>{{patient.year}}-{{patient.month}}-{{patient.day}}</td>
+        <button class="float-right" mat-icon-button ria-label="" (click)="openDialogDelete(patient.id)">
+          <mat-icon>remove_circle_outline</mat-icon>
+        </button>
+        <button class="edit-icon icons" mat-icon-button ria-label="" (click)="openDialogUpdate(patient)">
+          <mat-icon>border_color</mat-icon>
+        </button>
+        
       </tr>
 
     </tbody>
@@ -36,7 +50,7 @@
 
   <!-- <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#addProfileModal" id="buttonAdd">Add New Profile</button> -->
   <br><br><br>
-  <div class="modal fade" id="addProfileModal">
+  <div class="modal fade" id="patientModel">
     <div class="modal-dialog">
       <div class="modal-content">
 
@@ -49,17 +63,18 @@
 
         <!-- Modal body -->
         <div class="modal-body">
+          <h3>{{patient?.firstName}} {{patient?.lastName}} </h3>
           <!-- here this hastag is used to create a new variable which takes the whole form and then that value is  
                 used to send the data in onSubmitExperience which is created it in profile.component.ts-->
-          <table class="table table-striped">
+          <!-- <table class="table table-striped">
             <thead>
 
             </thead>
             <tbody>
-              <tr id="test" *ngFor="let p of patient">
+              <tr id="test">
 
                 <td class="font-italic">
-                  <h3>{{p.firstName}} {{p.lastName}} </h3>
+                  <h3>{{patient?.firstName}} {{patient?.lastName}} </h3>
                   <!-- <label> Email </label>
                   {{p.email}} <br>
 
@@ -67,10 +82,10 @@
                   {{p.disease}} <br>
                   <label>Date of birth</label>
                   {{p.dateOfBirth}}</td> -->
-
+                <!-- </td>
               </tr>
             </tbody>
-          </table>
+          </table> --> 
           <mat-divider></mat-divider>
           <div *ngIf="medicines?.length> 0; else noMedicines">
             <h3>Prescribed Medicines</h3>
@@ -128,7 +143,7 @@
           aria-hidden="true">×</button>
       </div>
     </div>
-  </div>
+ 
 
   <!-- <button (click)="addMedicineToPatient()">Add</button> -->
 </div>

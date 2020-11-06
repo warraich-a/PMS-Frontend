@@ -1,3 +1,4 @@
+import { fade } from './../../animation/fade';
 import { MedicineService } from './../../services/medicine/medicine.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -10,7 +11,10 @@ import {
 @Component({
   selector: 'app-dialog-add-medicine',
   templateUrl: './dialog-add-medicine.component.html',
-  styleUrls: ['./dialog-add-medicine.component.css']
+  styleUrls: ['./dialog-add-medicine.component.css'],
+  animations: [
+    fade
+  ]
 })
 export class DialogAddMedicineComponent implements OnInit {
 
