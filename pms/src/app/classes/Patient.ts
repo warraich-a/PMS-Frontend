@@ -14,5 +14,10 @@ export interface Patient{
     city:string;
     zipcode:string;
     disease:string;
+    userType: string;
   }
-  
+
+enum Type {
+  Pharmacist,
+  Patient
+}

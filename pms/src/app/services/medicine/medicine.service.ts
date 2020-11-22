@@ -1,4 +1,5 @@
-import { HttpClient } from '@angular/common/http';
+import { ApiService } from 'src/app/api.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   MatSnackBar,
@@ -8,19 +9,21 @@ import {
 @Injectable({
   providedIn: 'root'
 })
-export class MedicineService {
+export class MedicineService extends ApiService{
 
   constructor(private httpClient: HttpClient,
-             private _snackBar: MatSnackBar) { }
+             private _snackBar: MatSnackBar) { 
+          super(); 
+  }
 
   public getMedicines(){
-    return this.httpClient.get(`http://localhost:9090/pharmacist/medicines`);
+    return this.httpClient.get(`http://localhost:9090/pharmacist/medicines`, this.HttpOptions);
   }
   public getMedicineById(id){
-    return this.httpClient.get(`http://localhost:9090/pharmacist/medicine/`+id);
+    return this.httpClient.get(`http://localhost:9090/pharmacist/medicine/`+id, this.HttpOptions);
   }
   public addMedicine(data){
-    return this.httpClient.post('http://localhost:9090/pharmacist/medicine', data).subscribe((data)=>
+    return this.httpClient.post('http://localhost:9090/pharmacist/medicine', data, this.HttpOptions).subscribe((data)=>
     { 
       
     },
@@ -30,7 +33,7 @@ export class MedicineService {
       
   }
   public deleteMedicine(id){
-    return this.httpClient.delete('http://localhost:9090/pharmacist/medicine/' + id + '/delete/').subscribe((data)=>
+    return this.httpClient.delete('http://localhost:9090/pharmacist/medicine/' + id + '/delete/', this.HttpOptions).subscribe((data)=>
     {
 
     },
@@ -39,7 +42,7 @@ export class MedicineService {
     });
   }
   public updateMedicine(data){
-    return this.httpClient.put('http://localhost:9090/pharmacist/medicine', data).subscribe((data)=>
+    return this.httpClient.put('http://localhost:9090/pharmacist/medicine', data, this.HttpOptions).subscribe((data)=>
     {
       this.successful();
     },

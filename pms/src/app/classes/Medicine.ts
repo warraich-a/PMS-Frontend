@@ -3,4 +3,5 @@ export interface Medicine{
     id:number;
     price:number;
     sellingPrice: number;
+    active:boolean;
   }

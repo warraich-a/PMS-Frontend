@@ -1,7 +1,4 @@
-
-<div class="container p-3 my-3 border" style="background-color: black;">
- 
-</div>
+<app-header></app-header>
 <div class="container p-3 my-3 border">
   <button
   [@bounce]="bounce"
@@ -10,16 +7,21 @@
     Add New Patient
   </button>
   <h1>Patients</h1>
-  <!-- <button id="buttonAdd" (click)="CreateExperience()">+</button> -->
-
   <br><br>
-  <mat-divider style="background-color: black;"></mat-divider>
+   <mat-divider style="background-color: black;"></mat-divider>
+ 
+    <mat-form-field class="input-full-width" style="background-color:gray;">
+      <div>
+        <input type="text" matInput [(ngModel)]="searchValue" id="search" placeholder="Search by any letter">
+      </div>  
+   </mat-form-field>
+
   <table class="table table-hover table-striped table-responsive-lg">
     <thead>
       <tr>
         <th>First Name</th>
         <th>Last Name</th>
-        <th>Email Name</th>
+        <th>Email </th>
         <th>Disease</th>
         <th>Date of birth</th>
       </tr>
@@ -27,30 +29,38 @@
     <tbody>
 
       <!-- @slideInOut -->
-      <tr id="test" 
-      *ngFor="let patient of pts" 
-      matTooltip="Click on the first name to see the details">
-        <td (click)="getPatientData(patient.id)" data-toggle="modal"
-        data-target="#patientModel" style="cursor: pointer;">{{patient.firstName}}</td>
-        <td>{{patient.lastName}}</td>
-        <td>{{patient.email}}</td>
-        <td>{{patient.disease}}</td>
-        <td>{{patient.year}}-{{patient.month}}-{{patient.day}}</td>
-        <button class="float-right" mat-icon-button ria-label="" (click)="openDialogDelete(patient.id)">
-          <mat-icon>remove_circle_outline</mat-icon>
-        </button>
-        <button class="edit-icon icons" mat-icon-button ria-label="" (click)="openDialogUpdate(patient)">
-          <mat-icon>border_color</mat-icon>
-        </button>
-        
-      </tr>
+      <!--  -->
 
+      <!-- Below after | i am giving the value I want to search basically that is a pipe and the name of the pipe is search Filter
+      which can be seen in the pipe, so whatever name you give there you have to use that here  -->
+
+      <!-- And the value you type in the searchValue, that will be sent to pipe , however in the pipe filter, the left side list must be provided in 
+      the transform  method of pipe. you can see that in search-filter.ts -->
+      <!-- the right side of the pipe is the value by which you want to filter, e.g. here the letters -->
+
+     <tr id="test" 
+     
+       *ngFor="let patient of patients | searchFilter:searchValue"  matTooltip="Click on the first name to see the details">
+            <td (click)="getPatientData(patient.id)" data-toggle="modal"
+            data-target="#patientModel" style="cursor: pointer;">{{patient.firstName}}</td>
+            <td>{{patient.lastName}}</td>
+            <td>{{patient.email}}</td>
+            <td>{{patient.disease}}</td>
+            <td>{{patient.year}}-{{patient.month}}-{{patient.day}}</td>
+             <button class="float-right" mat-icon-button (click)="openDialogDelete(patient.id)">
+               <mat-icon>remove_circle_outline</mat-icon>
+             </button>
+            <button class="edit-icon icons float-right" mat-icon-button (click)="openDialogUpdate(patient)">
+              <mat-icon>border_color</mat-icon>
+           </button>
+      </tr>
     </tbody>
   </table>
 
+  
   <!-- <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#addProfileModal" id="buttonAdd">Add New Profile</button> -->
   <br><br><br>
-  <div class="modal fade" id="patientModel">
+  <div class="modal fade"  id="patientModel">
     <div class="modal-dialog">
       <div class="modal-content">
 
@@ -58,7 +68,8 @@
         <div class="modal-header">
           <h4 class="modal-title">Add Profile</h4>
           <button
-            type="button" class="close" data-dismiss="modal">&times;</button>
+             type="button" class="close" data-dismiss="modal">&times;
+          </button>
         </div>
 
         <!-- Modal body -->
@@ -66,42 +77,35 @@
           <h3>{{patient?.firstName}} {{patient?.lastName}} </h3>
           <!-- here this hastag is used to create a new variable which takes the whole form and then that value is  
                 used to send the data in onSubmitExperience which is created it in profile.component.ts-->
-          <!-- <table class="table table-striped">
-            <thead>
-
-            </thead>
-            <tbody>
-              <tr id="test">
-
-                <td class="font-italic">
-                  <h3>{{patient?.firstName}} {{patient?.lastName}} </h3>
-                  <!-- <label> Email </label>
-                  {{p.email}} <br>
-
-                  <label>Reason of sickness</label>
-                  {{p.disease}} <br>
-                  <label>Date of birth</label>
-                  {{p.dateOfBirth}}</td> -->
-                <!-- </td>
-              </tr>
-            </tbody>
-          </table> --> 
+ 
           <mat-divider></mat-divider>
           <div *ngIf="medicines?.length> 0; else noMedicines">
             <h3>Prescribed Medicines</h3>
-            <table class="table table-striped">
+            <table class="table table-striped table-responsive-lg ">
               <thead>
                 <tr>
                   <th>Medicine </th>
                   <th>Price</th>
+                  <th>Status</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="test" *ngFor="let p of medicines"
+                <tr class="test"  *ngFor="let p of medicines"
                   [ngClass]="{'medicines' : true}">
                   <td> {{p.medName}} </td>
                   <td>{{p.price}} </td>
-                  <button class="btn btn-danger float-right" id="">{{p.id}}</button>
+                  <td>
+                  <div *ngIf="p.active; else notActive">
+                    <button disabled class="btn btn-success">{{p.id}}</button>
+                  </div>
+                  <ng-template #notActive>
+                    <button disabled class="btn btn-danger">{{p.id}}</button>
+                  </ng-template>
+                </td>
+                <button class="float-right" mat-icon-button (click)="removeMedicineOfPatient(p.id)">
+                  <mat-icon>remove_circle_outline</mat-icon>
+                </button>
+
                 </tr>
               </tbody>
             </table>
@@ -109,9 +113,10 @@
           <ng-template #noMedicines>
             <p>There are no medicines prescribed yet</p>
           </ng-template>
-          <mat-divider></mat-divider>
-          <h3>Prescribe new medicine</h3>
-          <br><br>
+         
+             <mat-divider></mat-divider>
+             <h3>Prescribe new medicine</h3>
+              <br><br>
           <form class="text-left" #medicineToAdd="ngForm"
             (ngSubmit)="addMedicineToPatient(medicineToAdd.value)">
             <div class="form-group">
@@ -122,7 +127,6 @@
                   {{ m.medName }}
                 </option>
               </select>
-
             </div>
             <button
               mdbBtn
@@ -135,7 +139,6 @@
             </button>
           </form>
         </div>
-
       </div>
       <!-- Modal footer -->
       <div class="modal-footer">
@@ -143,7 +146,8 @@
           aria-hidden="true">×</button>
       </div>
     </div>
- 
+ </div>
 
-  <!-- <button (click)="addMedicineToPatient()">Add</button> -->
-</div>
+
+
+

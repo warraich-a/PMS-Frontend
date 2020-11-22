@@ -1,4 +1,5 @@
-   <div class="container p-3 my-3 border">
+<app-header></app-header>
+  <div class="container p-3 my-3 border">
     <button
       class="btn btn-success float-right" 
      (click)="openDialogMedicine()">
@@ -7,10 +8,15 @@
 
   
     <h1>Medicines</h1>
-    <!-- <button id="buttonAdd" (click)="CreateExperience()">+</button> -->
-    <br>
-    <br>
-    <br>
+    <br><br>
+    <mat-divider style="background-color: black;"></mat-divider>
+  
+     <mat-form-field class="input-full-width" style="background-color:gray;">
+       <div>
+         <input type="text" matInput [(ngModel)]="searchValue" id="search" placeholder="Search Medicine">
+       </div>  
+    </mat-form-field>
+
     <table class="table table-striped table-responsive-lg">
         <thead>
             <tr>
@@ -23,7 +29,7 @@
   
           <tr id="test" 
           @fade
-          *ngFor="let medicine of medicines">
+          *ngFor="let medicine of medicines | filterMedicine:searchValue">
             <td>{{medicine.medName}}</td>
             <td>{{medicine.price}}</td>
             <td>{{medicine.sellingPrice}}</td>

@@ -79,6 +79,7 @@ export class DialogAddPatientComponent implements OnInit {
          "streetName": data.streetName,
          "zipcode": data.zipcode, 
          "city": data.city,
+         "userType": "Patient",
      }
       this.patientService.addPatients(<JSON>this.patientToAdd);
       console.log(this.patientToAdd);

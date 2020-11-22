@@ -1,10 +1,3 @@
-.navbar-nav {
-  margin-left: auto;
-}
-::ng-deep .customNav nav {
-  background-color: #623165;
-}
-
 .mat-flat-button.mat-accent,
 .mat-raised-button.mat-accent,
 .mat-fab.mat-accent,
@@ -17,4 +10,12 @@
 .mat-fab.mat-accent,
 .mat-mini-fab.mat-accent {
   color: palevioletred;
+}
+
+.bg-custom-1 {
+  background-color: #85144b;
+}
+
+.bg-custom-2 {
+  background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
 }

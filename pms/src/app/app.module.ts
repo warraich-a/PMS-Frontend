@@ -1,3 +1,4 @@
+import { AuthGuard } from './auth/auth.guard';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms"
@@ -16,7 +17,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { PatientsComponent } from './patients/patients.component';
 import { PharmacistComponent } from './pharmacist/pharmacist.component';
 import { MedicineComponent } from './medicine/medicine.component';
-import { LoginComponent } from './login/login.component';
 import { from } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogAddMedicineComponent } from './medicine/dialog-add-medicine/dialog-add-medicine.component';
@@ -27,6 +27,16 @@ import { DialogAddPatientComponent } from './patients/dialog-add-patient/dialog-
 import { DialogUpdatePatientComponent } from './patients/dialog-update-patient/dialog-update-patient.component';
 import { DialogDeletePatientComponent } from './patients/dialog-delete-patient/dialog-delete-patient.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { SearchFilterPipe } from './patients/pipe/search-filter.pipe';
+import { HeaderComponent } from './header/header/header.component';
+import { LoginComponent } from './login/login.component';
+import { ClientsComponent } from './clients/clients.component';
+import { RegisterationComponent } from './registeration/registeration.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { ForbiddenComponent } from './errors/forbidden/forbidden.component';
+import { ClientHeaderComponent } from './clients/client-header/client-header.component';
+import { UpdatesComponent } from './clients/updates/updates.component';
+import { FilterMedicinePipe } from './patients/pipe/medicine/filter-medicine.pipe';
 
 // below we are mentioning that this is an ngmodule just like in components we tell 
 // it about the type of class above the export
@@ -42,7 +52,16 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     DialogUpdateMedicineComponent,
     DialogAddPatientComponent,
     DialogUpdatePatientComponent,
-    DialogDeletePatientComponent 
+    DialogDeletePatientComponent,
+    SearchFilterPipe,
+    HeaderComponent,
+    ClientsComponent,
+    RegisterationComponent,
+    NavBarComponent,
+    ForbiddenComponent,
+    ClientHeaderComponent,
+    UpdatesComponent,
+    FilterMedicinePipe 
   ],
   imports: [
     BrowserModule,
@@ -61,7 +80,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatTooltipModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

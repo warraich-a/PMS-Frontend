@@ -1,0 +1,24 @@
+/* Structure */
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+::ng-deep .mat-tooltip {
+  background: forestgreen !important;
+  font-size: 20px;
+}
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; /* Remove default arrow */
+  width: 100%;
+  border-radius: 2px;
+}
+
+.modal-dialog {
+  max-width: 70%; /* New width for default modal */
+}

@@ -1,0 +1,10 @@
+.navbar-nav {
+  margin-left: auto;
+  margin-right: 5%;
+}
+::ng-deep .customNav nav {
+  background-color: #623165;
+}
+.rounded-circle {
+  margin-left: 20%;
+}

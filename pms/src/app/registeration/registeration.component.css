@@ -1,0 +1,54 @@
+h1 {
+  text-align: center;
+}
+
+.container-left {
+  float: left;
+  width: 45%;
+}
+.container-right {
+  float: right;
+  width: 45%;
+}
+
+.input-full-width {
+  width: 100%;
+  color: aquamarine;
+  text-align: left;
+  float: left;
+}
+.text-center {
+  border-radius: 2%;
+  background-color: gray;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+  padding: 20px;
+  background-color: #623165;
+}
+
+#formContent {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background: #fff;
+  padding: 30px;
+  width: 90%;
+  position: relative;
+  padding: 10px;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+  text-align: center;
+  background-color: gray;
+}
+#link {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 15px;
+}

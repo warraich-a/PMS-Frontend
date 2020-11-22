@@ -1,4 +1,7 @@
 import { Medicine } from 'src/app/classes/Medicine';
+import { Observable } from 'rxjs';
+import { Management } from './../classes/Management';
+import { MedicineService } from './../services/medicine/medicine.service';
 import { DialogUpdatePatientComponent } from './dialog-update-patient/dialog-update-patient.component';
 import { Patient } from 'src/app/classes/Patient';
 import { fade } from './../animation/fade';
@@ -11,13 +14,13 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import {FormControl} from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPatientComponent } from './dialog-add-patient/dialog-add-patient.component';
 import { trigger, transition, useAnimation, animate, style } from '@angular/animations';
 import { bounce } from 'ng-animate';
 import { DialogDeletePatientComponent } from './dialog-delete-patient/dialog-delete-patient.component';
-
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-patients',
@@ -43,19 +46,27 @@ export class PatientsComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   bounce: any;
-  pts: Patient[];
+  patients: Patient[];
+  searchValue: string;
   patient: Patient;
-  medicines: Medicine[];
+  managements: Medicine[];
   allMedicines:  Medicine[];
   patientId: number;
   medicineToAdd: {}
   medicineId : number;
   patientIdToAddMed :number;
   courses: [];
-  constructor(private patientService: PatientService,
+  medicines: Medicine[];
+  tempMedicines: Medicine[];
+  
+  
+  
+  constructor(private patientService: PatientService, 
+              private medicineService: MedicineService,
               private _snackBar: MatSnackBar,
               private route: ActivatedRoute,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog,
+              private router: Router) { }
 
   openSnackBar() {
     this._snackBar.open('Cannonball!!', 'End now', {
@@ -76,8 +87,13 @@ export class PatientsComponent implements OnInit {
     this.patientService.getMedicineByPatientId(id).subscribe((data)=>{
 
       this.medicines = <Medicine[]>data;
-      console.log(this.medicines);
       
+      this.medicines.sort((a,b) => (+b.active) - (+a.active));
+
+      // this.medicines = this.tempMedicines;
+      console.log("Found managements");
+      
+      console.log(this.medicines);      
     });
     
     this.patientService.getMedicines().subscribe((data)=>{
@@ -86,6 +102,23 @@ export class PatientsComponent implements OnInit {
     });
 
   } 
+
+  getMedicineById(id){
+   
+    this.medicineService.getMedicineById(id).subscribe((data)=>{
+    
+      // this.medicines = <Medicine[]>data;
+      this.medicines.push(<Medicine>data);
+      console.log("Found medicines");
+      console.log(this.medicines);
+      
+      });
+     
+  }
+
+  Sort(){
+    this.medicines.sort(x => x ? -1 : 1)
+  }
 
   addMedicineToPatient(data){
     console.log("here");
@@ -109,11 +142,21 @@ export class PatientsComponent implements OnInit {
         // this.ngOnInit();
     });
   }
+  getLogout(){
+   var test = this.patientService.isLoggedIn();
+   console.log(test);
+  }
 
   getAllPatients(){
     this.patientService.getPatients().subscribe((data)=>{
       console.log(data);
-      this.pts =<Patient[]>data;
+      this.patients =<Patient[]>data;
+      this.getLogout();
+      
+    },
+    (error: Response) => {
+      // this.router.navigate(['forbidden'])
+      this.errorHandler(error);
     });
   }
 
@@ -122,7 +165,8 @@ export class PatientsComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogUpdatePatientComponent, {
       width: '70%',
       data: {patient: patient},
-      panelClass: ['custom-modalbox','animate__animated','animate__slideInLeft']
+      panelClass: ['custom-modalbox','animate__animated','animate__slideInLeft'],
+      
     }); 
     dialogRef.afterClosed()
       .subscribe(res => {
@@ -143,6 +187,30 @@ export class PatientsComponent implements OnInit {
         this.ngOnInit();
     });
   }
+
+  removeMedicineOfPatient(medId){
+    console.log(this.patientIdToAddMed);
+    console.log(medId);
+    this.patientService.removeMedicinePatient(this.patientIdToAddMed, medId);
+  }
+
+  private errorHandler(error: Response){
+    if(error.status === 403){
+      this.router.navigate(['forbidden'])
+    } 
+    else if(error.status === 404){
+      this._snackBar.open('Not Found!!', 'End now', {
+        duration: 1000,
+     });
+    } 
+    else 
+    {
+      this._snackBar.open('Wrong data provided', 'End now', {
+        duration: 1000,
+      });
+    }
+  };
+
 
   ngOnInit(): void {
 
