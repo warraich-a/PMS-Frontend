@@ -1,5 +1,12 @@
+import { Router } from '@angular/router';
 import { PatientService } from './../services/patient/patient.service';
 import { Component, OnInit } from '@angular/core';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
+import { ChatService } from '../services/webSocket/web-socket.service';
 
 @Component({
   selector: 'app-registeration',
@@ -55,13 +62,17 @@ export class RegisterationComponent implements OnInit {
     {day: 5}
 
   ]
+  connect = this.chatService.connect();
 
-  constructor(private patientService: PatientService) { }
+  constructor(private patientService: PatientService,
+              private router: Router,
+              private _snackBar: MatSnackBar,
+              private chatService: ChatService) { }
+
+
   onSubmitPatient(data){
     this.patientToAdd =  {
-       "year": data.year,
-       "day": data.day,
-       "month": data.month,
+       "dateOfBirth": data.dateOfBirth,
        "disease": data.disease,
        "email": data.email,
        "firstName": data.firstName,
@@ -72,10 +83,37 @@ export class RegisterationComponent implements OnInit {
        "zipcode": data.zipcode, 
        "city": data.city,
        "userType": "Patient",
+      //  "webSocket": this.connect,
    }
-    this.patientService.addPatients(<JSON>this.patientToAdd);
-    console.log(this.patientToAdd);
+    this.patientService.addPatients(<JSON>this.patientToAdd).subscribe((data)=>
+    { 
+      console.log(this.patientToAdd);
+     this.router.navigate(['/login']);
+    },
+    (error: Response) => {
+      this.errorHandler(error);
+    });
+   
   }
+
+  private errorHandler(error: Response){
+    if(error.status === 409){
+      this._snackBar.open('Already exist!!', 'End now', {
+        duration: 1000,
+      });
+    } 
+    else if(error.status === 404){
+      this._snackBar.open('Not Found!!', 'End now', {
+        duration: 1000,
+     });
+    } 
+    else 
+    {
+      this._snackBar.open('Wrong data provided', 'End now', {
+        duration: 1000,
+      });
+    }
+  };
   ngOnInit(): void {
   }
 

@@ -79,7 +79,7 @@ export class MedicineComponent implements OnInit {
         this.ngOnInit();
     });
   }
-  private errorHandler(error: Response){
+  private  errorHandler(error: Response){
     if(error.status === 403){
       this.router.navigate(['forbidden'])
     } 

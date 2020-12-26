@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {
@@ -20,37 +21,33 @@ export class PatientService extends ApiService {
   
 
   constructor(private httpClient: HttpClient,
-              private _snackBar: MatSnackBar,) {
+              private _snackBar: MatSnackBar,
+              private router: Router) {
   super();
   }
  
 
   credentials: string;
 
-  public login(data){
-    this.credentials = btoa(data.email + ":" + data.password); // email:password
+  public login(email,password){
+    this.credentials = btoa(email + ":" + password); // email:password
     console.log(this.HttpOptions.headers);
     
       this.HttpOptions = {
         headers: new HttpHeaders({'Content-Type': 'application/json', 'Authorization': this.credentials})
       }
-     
-    return this.httpClient.get('http://localhost:9090/pharmacist?email='+data.email + '&password='+data.password, this.HttpOptions);
+      const body = email+":"+password;
+
+    return this.httpClient.post('http://localhost:9090/pharmacist/login', body, this.HttpOptions);
 
   }
 
-  public getPatients(){
+  public getPatients(){   
     console.log(this.HttpOptions);
     return this.httpClient.get(`http://localhost:9090/pharmacist/patients`, this.HttpOptions);
   }
   public addPatients(data){
-    return this.httpClient.post(`http://localhost:9090/pharmacist/patient`, data).subscribe((data)=>
-    { 
-      
-    },
-    (error: Response) => {
-      this.errorHandler(error);
-    });
+    return this.httpClient.post(`http://localhost:9090/pharmacist/patient`, data);
   }
   public updatePatients(data){
     return this.httpClient.put(`http://localhost:9090/pharmacist/patient`, data, this.HttpOptions).subscribe((data)=>

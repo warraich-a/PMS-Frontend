@@ -3,7 +3,10 @@
     <div id="formContent">
         <app-client-header></app-client-header>
         <h1>updates work</h1>
-          
+        <mat-nav-list *ngFor="let receivedMessage of receivedMessages" style="width: 22em">
+            <mat-divider></mat-divider>
+            <mat-list-item>{{receivedMessage.text}}</mat-list-item>
+          </mat-nav-list>
     </div>
 
 </div>

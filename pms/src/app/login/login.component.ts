@@ -23,11 +23,11 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onLoginSubmit(data){
+  onLoginSubmit(email,password){
     // encoding the email and password 
-    this.token = btoa(data.email + ":" + data.password); 
+    this.token = btoa(email + ":" + password); 
 
-    this.PatientService.login(data).subscribe((response:any)=>{
+    this.PatientService.login(email,password).subscribe((response:any)=>{
       this.user = <Patient>response;
       this.id = this.user.id;
 

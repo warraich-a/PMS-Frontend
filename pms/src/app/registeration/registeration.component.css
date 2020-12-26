@@ -30,25 +30,53 @@ h1 {
   width: 100%;
   min-height: 100%;
   padding: 20px;
-  background-color: #623165;
 }
 
 #formContent {
-  -webkit-border-radius: 10px 10px 10px 10px;
-  border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
   background: #fff;
-  padding: 30px;
-  width: 90%;
+  padding-top: 40px;
+  width: 1000px;
   position: relative;
-  padding: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
   -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
   box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
   text-align: center;
-  background-color: gray;
+  background-color: rgb(129, 127, 127);
 }
+
 #link {
   position: absolute;
-  right: 0;
-  bottom: 0;
+
   padding: 15px;
+}
+#submitButton {
+  background-color: white;
+  padding-right: 60px;
+  padding-left: 60px;
+}
+
+.underlineHover {
+  text-decoration: underline;
+}
+
+::ng-deep input.mat-input-element {
+  color: white;
+}
+
+/* Change label color on focused */
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+  color: white !important;
+}
+
+/* underline border color on focused */
+::ng-deep .mat-focused .mat-form-field-underline .mat-form-field-ripple {
+  background-color: white !important;
+}
+
+.footerBtns {
+  margin-right: auto;
+  margin-left: auto;
 }

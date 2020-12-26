@@ -77,9 +77,7 @@ export class DialogUpdatePatientComponent implements OnInit {
     onSubmitPatient(data){
       this.patientToUpdate =  {
          "id": this.id,
-         "year": data.year,
-         "day": data.day,
-         "month": data.month,
+         "dateOfBirth": data.dateOfBirth,
          "disease": data.disease,
          "email": data.email,
          "firstName": data.firstName,
@@ -89,6 +87,7 @@ export class DialogUpdatePatientComponent implements OnInit {
          "streetName": data.streetName,
          "zipcode": data.zipcode, 
          "city": data.city,
+         "userType": "Patient",
      }
       this.patientService.updatePatients(<JSON>this.patientToUpdate);
       console.log(this.patientToUpdate);

@@ -1,11 +1,12 @@
-
+<div class="container">
 <form 
 class="text-center"
 #addPatient="ngForm"
 (ngSubmit)="onSubmitPatient(addPatient.value)">
-
-    <div class="container-left">
-          <h1>Add Patient</h1>
+<h1>Add Patient</h1>
+<div class="row">
+    <div class="col">
+          <h3>Basic Information</h3>
           <mat-form-field   
                 class="input-full-width">
                 <input matInput type="text" 
@@ -20,7 +21,13 @@ class="text-center"
                 ngModel 
                 placeholder="Last Name"> 
           </mat-form-field>
+
           <mat-form-field 
+            class="input-full-width">
+            <label for="dateOfBirth">Date of Birth</label>
+            <input matInput  type="date" name="dateOfBirth" ngModel style="width: 100%;">
+        </mat-form-field>
+          <!-- <mat-form-field 
             class="input-full-width">
             <mat-label>Year</mat-label>
             <mat-select name="year" ngModel>
@@ -52,82 +59,89 @@ class="text-center"
                 </mat-option>
             </mat-select>
         </mat-form-field>
-        
-        <h4>Sickness</h4>
+         -->
+        <!-- <h4>Sickness</h4>
         <mat-form-field 
               class="input-full-width" >
               <input matInput type="text" 
               name="disease" 
               ngModel 
               placeholder="What is the sickness?"> 
-      </mat-form-field>
+      </mat-form-field> -->
+    
        
-            
-    </div>
-    <div class="container-right">
-    <h1>Adresss</h1>
-        <mat-form-field 
-                class="input-full-width" >
-                <input matInput type="text" 
-                name="streetName" 
-                ngModel 
-                placeholder="Street Name"> 
-          </mat-form-field>
-        
-          <mat-form-field 
-                class="input-full-width" >
-                <input matInput type="text" 
-                name="houseNr" 
-                ngModel 
-                placeholder="House Number"> 
-          </mat-form-field>
-          <mat-form-field 
-                class="input-full-width" >
-                <input matInput type="text" 
-                name="city" 
-                ngModel 
-                placeholder="City"> 
-          </mat-form-field>
-          <mat-form-field 
-                class="input-full-width" >
-                <input matInput type="text" 
-                name="zipcode" 
-                ngModel 
-                placeholder="Zipcode"> 
-          </mat-form-field>
+    </div>    
 
+        <div class="col">
           <h3>Credentials</h3>
           <mat-form-field 
                   class="input-full-width" >
                   <input matInput type="text" 
                   name="email" 
                   ngModel 
-                  placeholder="email"> 
-            </mat-form-field>
-            <br>
+                  placeholder="Email"> 
+          </mat-form-field>
+          <mat-form-field 
+              class="input-full-width" >
+              <input matInput type="text" 
+              name="password" 
+              ngModel 
+              placeholder="password"> 
+        </mat-form-field>
+        
+        </div>
+    </div>  
+    
+    <h1>Adresss</h1>    
+    <div class="row">
+        <div class="col">
             <mat-form-field 
-                  class="input-full-width" >
-                  <input matInput type="text" 
-                  name="password" 
-                  ngModel 
-                  placeholder="password"> 
-            </mat-form-field>
-            <button 
+            class="input-full-width" >
+            <input matInput type="text" 
+            name="streetName" 
+            ngModel 
+            placeholder="Street Name"> 
+      </mat-form-field>
+    
+      <mat-form-field 
+            class="input-full-width" >
+            <input matInput type="text" 
+            name="houseNr" 
+            ngModel 
+            placeholder="House Number"> 
+      </mat-form-field>
+        </div>
+        <div class="col">
+            <mat-form-field 
+            class="input-full-width" >
+            <input matInput type="text" 
+            name="city" 
+            ngModel 
+            placeholder="City"> 
+      </mat-form-field>
+      <mat-form-field 
+            class="input-full-width" >
+            <input matInput type="text" 
+            name="zipcode" 
+            ngModel 
+            placeholder="Zipcode"> 
+      </mat-form-field>
+      <button 
                 mdbBtn 
                 type="submit"  
                 rounded="true" 
                 class="btn btn-success"
                 id="submitButton" > 
                 submit
-            </button>
-            <button 
+        </button>
+        <button 
                 type="button" 
                 class="btn btn-danger" 
                 (click)="CloseDialog()">
                 Close
-            </button>  
-           
-    </div>  
-        
+        </button>  
+        </div>
+    </div>
 </form>
 
+</div>

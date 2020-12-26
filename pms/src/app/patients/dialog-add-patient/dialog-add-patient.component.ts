@@ -1,7 +1,11 @@
 import { PatientService } from './../../services/patient/patient.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 @Component({
   selector: 'app-dialog-add-patient',
   templateUrl: './dialog-add-patient.component.html',
@@ -59,7 +63,8 @@ export class DialogAddPatientComponent implements OnInit {
 
   constructor(private patientService: PatientService,  
     public dialogRef: MatDialogRef<DialogAddPatientComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private _snackBar: MatSnackBar) { }
 
     CloseDialog(){
       this.dialogRef.close();
@@ -67,9 +72,7 @@ export class DialogAddPatientComponent implements OnInit {
     
     onSubmitPatient(data){
       this.patientToAdd =  {
-         "year": data.year,
-         "day": data.day,
-         "month": data.month,
+         "dateOfBirth": data.dateOfBirth,
          "disease": data.disease,
          "email": data.email,
          "firstName": data.firstName,
@@ -81,10 +84,34 @@ export class DialogAddPatientComponent implements OnInit {
          "city": data.city,
          "userType": "Patient",
      }
-      this.patientService.addPatients(<JSON>this.patientToAdd);
+      this.patientService.addPatients(<JSON>this.patientToAdd).subscribe((data)=>
+      { 
+        this.CloseDialog()
+      },
+      (error: Response) => {
+        this.errorHandler(error);
+      });
       console.log(this.patientToAdd);
-      this.CloseDialog()
     }
+
+    private errorHandler(error: Response){
+      if(error.status === 409){
+        this._snackBar.open('Already exist!!', 'End now', {
+          duration: 1000,
+        });
+      } 
+      else if(error.status === 404){
+        this._snackBar.open('Not Found!!', 'End now', {
+          duration: 1000,
+       });
+      } 
+      else 
+      {
+        this._snackBar.open('Wrong data provided', 'End now', {
+          duration: 1000,
+        });
+      }
+    };
 
   ngOnInit(): void {
   }

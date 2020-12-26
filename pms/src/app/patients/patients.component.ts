@@ -21,11 +21,14 @@ import { trigger, transition, useAnimation, animate, style } from '@angular/anim
 import { bounce } from 'ng-animate';
 import { DialogDeletePatientComponent } from './dialog-delete-patient/dialog-delete-patient.component';
 import {MatTableDataSource} from '@angular/material/table';
+import { ChatService } from '../services/webSocket/web-socket.service';
+import { Message } from './Message';
 
 @Component({
   selector: 'app-patients',
   templateUrl: './patients.component.html',
   styleUrls: ['./patients.component.css'],
+  providers: [ChatService],
   animations: [
     fade,
     trigger('bounce', [transition('* => *', useAnimation(bounce))]),
@@ -59,14 +62,43 @@ export class PatientsComponent implements OnInit {
   medicines: Medicine[];
   tempMedicines: Medicine[];
   
-  
+  sentMessage;
+  receivedMessages: Array<Message> = [];
+  notificationToSend: {};
   
   constructor(private patientService: PatientService, 
               private medicineService: MedicineService,
               private _snackBar: MatSnackBar,
               private route: ActivatedRoute,
               public dialog: MatDialog,
-              private router: Router) { }
+              private router: Router,
+              private chatService: ChatService) {
+                this.chatService.connect();
+
+              chatService.getState().subscribe((msg) => {
+                this.receivedMessages.unshift({text: msg});
+              });
+
+               }
+
+               
+  sendMessage(data): void {
+    console.log(data)
+    
+    this.chatService.sendMessage(data);
+    // this.chatService.sendMessage(data);
+  
+
+  }
+
+disconnect(): void {
+  this.chatService.close();
+}
+
+connect(): void {
+  this.chatService.connect();
+}
+            
 
   openSnackBar() {
     this._snackBar.open('Cannonball!!', 'End now', {
@@ -125,10 +157,35 @@ export class PatientsComponent implements OnInit {
     console.log(data.medicineId);
     this.medicineToAdd = {
         "medicineId": data.medicineId,
-        "patientId": this.patientIdToAddMed
+        "patientId": this.patientIdToAddMed,
+        "startDate": data.startDate,
+        "endDate": data.endDate
+
     };
     
     this.patientService.addMedicineToPatient(<JSON>this.medicineToAdd);
+
+   let medicine;
+   this.allMedicines.forEach(function (value) {
+    if(data.medicineId == value.id){
+    console.log("sdfdsfdsf");
+
+    console.log(value.medName);
+    medicine = value.medName;
+  
+
+    }
+  });
+    var obj = {
+      "patientId": this.patientIdToAddMed,
+      "content": "some content"
+    }
+    var myJSON = JSON.stringify(obj);
+
+    this.sendMessage(myJSON);
+
+
+    console.log(this.medicineToAdd);
     
   }
   openDialogAddPatient(): void {

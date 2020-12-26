@@ -20,5 +20,5 @@ select {
 }
 
 .modal-dialog {
-  max-width: 70%; /* New width for default modal */
+  max-width: 80%; /* New width for default modal */
 }

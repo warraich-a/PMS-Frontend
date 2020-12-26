@@ -1,163 +1,136 @@
-<div class="container fadeInDown">
-    <div id="formContent">
-
-        <h1> Register </h1>
-        <mat-divider></mat-divider>
-        <form 
+<div class="container">
+    <form 
         class="text-center"
         #addPatient="ngForm"
         (ngSubmit)="onSubmitPatient(addPatient.value)">
         
-            <div class="container-left">
-                  <h1>Add Patient</h1>
-                  <mat-form-field   
-                        class="input-full-width">
-                        <input matInput type="text" 
-                        name="firstName" 
-                        ngModel 
-                        placeholder="First Name"> 
-                  </mat-form-field>
-                  <mat-form-field 
-                        class="input-full-width" >
-                        <input matInput type="text" 
-                        name="lastName" 
-                        ngModel 
-                        placeholder="Last Name"> 
-                  </mat-form-field>
-                  <mat-form-field 
+        <h1 style="color: white;"> Register </h1><br>
+        <mat-divider></mat-divider>
+            <div class="row">
+                <div class="col">
+                    <h4 style="color: white;"><i>Basic Information</i></h4>
+                    <mat-form-field   
                     class="input-full-width">
-                    <mat-label>Year</mat-label>
-                    <mat-select name="year" ngModel>
-                        <mat-option value="" disabled>Choose a year</mat-option>
-                        <mat-option *ngFor = "let l of years" [value]="l.year">
-                            {{l.year}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field 
-                class="input-full-width">
-                    <mat-label>Month</mat-label>
-                    <mat-select name="month" ngModel>
-                        <mat-option value="" disabled>Choose a month</mat-option>
-                        <mat-option *ngFor = "let l of months" [value]="l.month">
-                            {{l.month}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-              <br>
-        
-                <mat-form-field 
-                class="input-full-width">
-                    <mat-label>Day</mat-label>
-                    <mat-select name="day" ngModel>
-                        <mat-option value="" disabled>Choose a day</mat-option>
-                        <mat-option *ngFor = "let l of days" [value]="l.day">
-                            {{l.day}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                
-                <h4>Sickness</h4>
-                <mat-form-field 
-                      class="input-full-width" >
-                      <input matInput type="text" 
-                      name="disease" 
-                      ngModel 
-                      placeholder="What is the sickness?"> 
-              </mat-form-field>
-               
-                    
-            </div>
-            <div class="container-right">
-            <h1>Adresss</h1>
-                <mat-form-field 
-                        class="input-full-width" >
-                        <input matInput type="text" 
-                        name="streetName" 
-                        ngModel 
-                        placeholder="Street Name"> 
-                  </mat-form-field>
-                
-                  <mat-form-field 
-                        class="input-full-width" >
-                        <input matInput type="text" 
-                        name="houseNr" 
-                        ngModel 
-                        placeholder="House Number"> 
-                  </mat-form-field>
-                  <mat-form-field 
-                        class="input-full-width" >
-                        <input matInput type="text" 
-                        name="city" 
-                        ngModel 
-                        placeholder="City"> 
-                  </mat-form-field>
-                  <mat-form-field 
-                        class="input-full-width" >
-                        <input matInput type="text" 
-                        name="zipcode" 
-                        ngModel 
-                        placeholder="Zipcode"> 
-                  </mat-form-field>
-        
-                  <h3>Credentials</h3>
-                  <mat-form-field 
+                    <input matInput type="text" 
+                    name="firstName" 
+                    ngModel 
+                    placeholder="First Name"> 
+            </mat-form-field>
+            <mat-form-field 
                     class="input-full-width" >
                     <input matInput type="text" 
-                    name="email" 
+                    name="lastName" 
                     ngModel 
-                    placeholder="email"> 
-                </mat-form-field>
-                  <mat-form-field class="form-group input-full-width"> 
+                    placeholder="Last Name"> 
+            </mat-form-field>
+            <mat-form-field 
+                    class="input-full-width">
                     <input matInput 
-                        type="password" 
-                        [(ngModel)]="addPatient.password" 
-                        name="password" 
-                        placeholder="Password" 
-                        class="form-control" 
-                        required
-                        #password="ngModel" 
-                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" />
-                    <div *ngIf="password.invalid && (addPatient.submitted || password.touched)" class="alert alert-danger">
-                    <div *ngIf="password.errors.required"> Password is required. </div>
-                    <div *ngIf="password.errors.pattern"> Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters.</div>
-                    </div>
+                        type="date" 
+                        name="dateOfBirth" 
+                        ngModel
+                        placeholder="Date Of Birth"
+                        style="width: 100%;">
+                </mat-form-field>
+                </div>
+                <div class="col">
+                    <h4 style="color: white;"><i>Credentials</i></h4>
+                    <mat-form-field 
+                        class="input-full-width" >
+                        <input matInput type="text" 
+                        name="email" 
+                        ngModel 
+                        placeholder="Email"> 
                 </mat-form-field>
             
-                <mat-form-field class="form-group input-full-width">
-                    <input matInput 
-                        type="password" 
-                        [(ngModel)]="addPatient.confirmpassword" 
-                        name="confirmpassword" 
-                        placeholder="Confirm Password" 
-                        class="form-control" 
-                        required 
-                        #confirmpassword="ngModel" 
-                        pattern="{{ password.value }}" />
-                    <div *ngIf=" confirmpassword.invalid && (addPatient.submitted || confirmpassword.touched)" class="alert alert-danger">
-                    <div *ngIf="confirmpassword.errors.required"> Confirm password is required. </div>
-                    <div *ngIf="confirmpassword.errors.pattern"> Password & Confirm Password does not match.</div>
-                    </div>
-                </mat-form-field> 
+                        
+                <mat-form-field class="input-full-width"> 
+                <input matInput 
+                    type="password" 
+                    [(ngModel)]="addPatient.password" 
+                    name="password" 
+                    placeholder="Password" 
+                    
+                    required
+                    #password="ngModel" 
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" />
+                <div *ngIf="password.invalid && (addPatient.submitted || password.touched)" class="alert alert-danger">
+                <div *ngIf="password.errors.required"> Password is required. </div>
+                <div *ngIf="password.errors.pattern"> Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters.</div>
+                </div>
+            </mat-form-field>
+        
+            <mat-form-field class="input-full-width">
+                <input matInput 
+                    type="password" 
+                    [(ngModel)]="addPatient.confirmpassword" 
+                    name="confirmpassword" 
+                    placeholder="Confirm Password" 
+                    
+                    required 
+                    #confirmpassword="ngModel" 
+                    pattern="{{ password.value }}" />
+                <div *ngIf=" confirmpassword.invalid && (addPatient.submitted || confirmpassword.touched)" class="alert alert-danger">
+                <div *ngIf="confirmpassword.errors.required"> Confirm password is required. </div>
+                <div *ngIf="confirmpassword.errors.pattern"> Password & Confirm Password does not match.</div>
+                </div>
+            </mat-form-field> 
+                
+                </div>
+            </div>
+        <h2 style="color: white;"><i>Address</i></h2>
+            <div class="row">
+                
+                <div class="col">
+                    <mat-form-field 
+                    class="input-full-width" >
+                    <input matInput type="text" 
+                    name="streetName" 
+                    ngModel 
+                    placeholder="Street Name"> 
+            </mat-form-field>
+            
+            <mat-form-field 
+                    class="input-full-width" >
+                    <input matInput type="text" 
+                    name="houseNr" 
+                    ngModel 
+                    placeholder="House Number"> 
+            </mat-form-field>
+                </div>
+                <div class="col">
+                    
+                
+                    <mat-form-field 
+                            class="input-full-width" >
+                            <input matInput type="text" 
+                            name="city" 
+                            ngModel 
+                            placeholder="City"> 
+                    </mat-form-field>
+                    <mat-form-field 
+                            class="input-full-width" >
+                            <input matInput type="text" 
+                            name="zipcode" 
+                            ngModel 
+                            placeholder="Zipcode"> 
+                    </mat-form-field>
                     <button 
                     mdbBtn 
+                    color= "success"
                     type="submit"  
                     rounded="true" 
                     id="submitButton" > submit
-                </button>   
-       
-                   
-            </div>  
-                
-            
-               
-        </form>
-        
-        <a id="link" href="#">Already a member??</a>
-
-        
+                    </button>  
+                    <a  href="#">Already a member??</a>
+                </div>
+            </div>
+    </form>
 </div>
 
-</div>
+
+
+
+
 
 

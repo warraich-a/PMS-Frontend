@@ -55,26 +55,27 @@ h2 {
 
 #formContent {
   -webkit-border-radius: 10px 10px 10px 10px;
-  border-radius: 10px 10px 10px 10px;
+  border-radius: 5px;
   background: #fff;
-  padding: 30px;
-  width: 90%;
-  max-width: 450px;
+  padding-top: 30px;
+  /* width: 90%; */
+  padding-bottom: 25px;
+  width: 450px;
+  min-width: 450px;
   position: relative;
-  padding: 0px;
+
   -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
   box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
   text-align: center;
-  background-color: gray;
+  background-color: rgb(129, 127, 127);
+}
+
+#submitButton {
+  background-color: white;
 }
 
 #formFooter {
-  background-color: #f6f6f6;
-  border-top: 1px solid #dce8f1;
-  padding: 25px;
   text-align: center;
-  -webkit-border-radius: 0 0 10px 10px;
-  border-radius: 0 0 10px 10px;
 }
 
 /* TABS */
@@ -93,10 +94,12 @@ h2.active {
 }
 
 .input-full-width {
-  width: 100%;
-  color: aquamarine;
+  width: 350px;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
   text-align: left;
-  float: left;
+
   padding: 2%;
 }
 .error-display {
@@ -105,4 +108,21 @@ h2.active {
 
   position: absolute; */
   margin-top: 15%;
+}
+.underlineHover {
+  text-decoration: underline;
+}
+
+::ng-deep input.mat-input-element {
+  color: white;
+}
+
+/* Change label color on focused */
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+  color: white !important;
+}
+
+/* underline border color on focused */
+::ng-deep .mat-focused .mat-form-field-underline .mat-form-field-ripple {
+  background-color: white !important;
 }

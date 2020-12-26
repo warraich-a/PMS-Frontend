@@ -37,7 +37,8 @@ import { ForbiddenComponent } from './errors/forbidden/forbidden.component';
 import { ClientHeaderComponent } from './clients/client-header/client-header.component';
 import { UpdatesComponent } from './clients/updates/updates.component';
 import { FilterMedicinePipe } from './patients/pipe/medicine/filter-medicine.pipe';
-
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatBadgeModule} from '@angular/material/badge';
 // below we are mentioning that this is an ngmodule just like in components we tell 
 // it about the type of class above the export
 @NgModule({
@@ -61,7 +62,8 @@ import { FilterMedicinePipe } from './patients/pipe/medicine/filter-medicine.pip
     ForbiddenComponent,
     ClientHeaderComponent,
     UpdatesComponent,
-    FilterMedicinePipe 
+    FilterMedicinePipe
+  
   ],
   imports: [
     BrowserModule,
@@ -78,7 +80,9 @@ import { FilterMedicinePipe } from './patients/pipe/medicine/filter-medicine.pip
     MatDialogModule,
     MatIconModule,
     MatTooltipModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatTabsModule,
+    MatBadgeModule 
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
