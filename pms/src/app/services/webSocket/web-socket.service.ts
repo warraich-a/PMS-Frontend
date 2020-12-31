@@ -23,8 +23,11 @@ export class ChatService {
   }
 
   public connect(): void {
+    var id = localStorage.getItem('id');
     if (!this.socket$ || this.socket$.closed) {
       this.socket$ = ChatService.getNewWebSocket() as WebSocketSubject<any>;
+      var s = "id"+id;
+      this.sendMessage(s);
       this.socket$.subscribe(
         msg => this.populateMessage(msg),
         // Called whenever there is a message from the server
@@ -54,11 +57,12 @@ export class ChatService {
 
     // this.state$.next(message);
     let id: string = obj.patientId;
+    let notification: string = obj.content;
     console.log('patient Id: ' + id);
     // id = message.substring(message.indexOf("/")+1,message.length);
     if(id == localStorage.getItem("id")) {
       console.log('message received: ' + message);
-    this.state$.next(message);
+    this.state$.next(notification);
     } 
   }
 

@@ -1,4 +1,3 @@
-import { PharmacistComponent } from './../pharmacist/pharmacist.component';
 import { PatientService } from 'src/app/services/patient/patient.service';
 import { ApiService } from './../api.service';
 import { Component, OnInit, Type } from '@angular/core';

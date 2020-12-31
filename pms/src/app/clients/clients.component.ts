@@ -14,7 +14,7 @@ import { PatientService } from '../services/patient/patient.service';
 export class ClientsComponent implements OnInit {
 
   patient: Patient;
-  medicines: Object[];
+  medicines: Medicine[];
   id : number;
   constructor(private patientService: PatientService,
     private _snackBar: MatSnackBar,
@@ -30,7 +30,9 @@ export class ClientsComponent implements OnInit {
     });
     this.patientService.getMedicineByPatientIdClient(id).subscribe((data)=>{
 
-      this.medicines = <Object[]>data;
+      this.medicines = <Medicine[]>data;
+      this.medicines.sort((a,b) => (+b.active) - (+a.active));
+
       console.log(this.medicines);
       
     },

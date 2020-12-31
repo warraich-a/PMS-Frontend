@@ -7,6 +7,30 @@
             <mat-divider></mat-divider>
             <mat-list-item>{{receivedMessage.text}}</mat-list-item>
           </mat-nav-list>
+
+
+          <table class="table table-hover table-striped table-responsive-lg">
+            <thead>
+              <tr>
+                <th>Notification</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+        
+              <!-- @slideInOut -->
+              <!--  -->
+        
+              <tr class="test" *ngFor="let r of existingNotifications " data-ng-repeat="feed in existingNotifications |orderBy:'':true">
+                  
+                    <td> {{r.content }} </td>
+                    <td>{{r.date}} </td>
+                                   
+              </tr>
+        
+            </tbody>
+          </table>
+          
     </div>
 
 </div>

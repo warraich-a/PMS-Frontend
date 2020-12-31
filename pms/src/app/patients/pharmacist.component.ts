@@ -1,10 +1,10 @@
 import { Medicine } from 'src/app/classes/Medicine';
 import { Observable } from 'rxjs';
-import { Management } from './../classes/Management';
-import { MedicineService } from './../services/medicine/medicine.service';
+import { Management } from '../classes/Management';
+import { MedicineService } from '../services/medicine/medicine.service';
 import { DialogUpdatePatientComponent } from './dialog-update-patient/dialog-update-patient.component';
 import { Patient } from 'src/app/classes/Patient';
-import { fade } from './../animation/fade';
+import { fade } from '../animation/fade';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { PatientService } from '../services/patient/patient.service';
@@ -26,8 +26,8 @@ import { Message } from './Message';
 
 @Component({
   selector: 'app-patients',
-  templateUrl: './patients.component.html',
-  styleUrls: ['./patients.component.css'],
+  templateUrl: './pharmacist.component.html',
+  styleUrls: ['./pharmacist.component.css'],
   providers: [ChatService],
   animations: [
     fade,
@@ -45,7 +45,7 @@ import { Message } from './Message';
 })
 
 
-export class PatientsComponent implements OnInit {
+export class PharmacistComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   bounce: any;
@@ -162,32 +162,36 @@ connect(): void {
         "endDate": data.endDate
 
     };
-    
-    this.patientService.addMedicineToPatient(<JSON>this.medicineToAdd);
+    let medicine;
+    this.allMedicines.forEach(function (value) {
+      if(data.medicineId == value.id){
+      console.log("sdfdsfdsf");
 
-   let medicine;
-   this.allMedicines.forEach(function (value) {
-    if(data.medicineId == value.id){
-    console.log("sdfdsfdsf");
-
-    console.log(value.medName);
-    medicine = value.medName;
+      console.log(value.medName);
+      medicine = value.medName;
+      }
+    });
+    this.patientService.addMedicineToPatient(<JSON>this.medicineToAdd).subscribe(data => {
   
+      var obj = {
+        "patientId": this.patientIdToAddMed,
+        "content": "A new medicine name "+medicine+" is prescribed to you"
+      }
+      var myJSON = JSON.stringify(obj);
+  
+      this.sendMessage(myJSON);
+  
+  
+      console.log(this.medicineToAdd);
+      
+    },
+    (error: Response) => {
+   
+    });
+  };
 
-    }
-  });
-    var obj = {
-      "patientId": this.patientIdToAddMed,
-      "content": "some content"
-    }
-    var myJSON = JSON.stringify(obj);
 
-    this.sendMessage(myJSON);
-
-
-    console.log(this.medicineToAdd);
-    
-  }
+  
   openDialogAddPatient(): void {
     const dialogRef = this.dialog.open(DialogAddPatientComponent,{
       width: '70%',
@@ -245,10 +249,19 @@ connect(): void {
     });
   }
 
-  removeMedicineOfPatient(medId){
-    console.log(this.patientIdToAddMed);
-    console.log(medId);
+  removeMedicineOfPatient(medId, medName){
+
     this.patientService.removeMedicinePatient(this.patientIdToAddMed, medId);
+    var obj = {
+      "patientId": this.patientIdToAddMed,
+      "content": "A medicine name "+medName+" is removed"
+    }
+    var myJSON = JSON.stringify(obj);
+
+    this.sendMessage(myJSON);
+
+
+    console.log(this.medicineToAdd);
   }
 
   private errorHandler(error: Response){

@@ -83,12 +83,7 @@ export class PatientService extends ApiService {
     return this.httpClient.get(`http://localhost:9090/pharmacist/client/medicine/`+id, this.HttpOptions);
   }
   public addMedicineToPatient(data){
-    return this.httpClient.post('http://localhost:9090/pharmacist/patient/medicine', data, this.HttpOptions).toPromise().then(data => {
-      console.log(data);
-    },
-    (error: Response) => {
-      this.errorHandler(error);
-    });
+    return this.httpClient.post('http://localhost:9090/pharmacist/patient/medicine', data, this.HttpOptions);
   }
  
   public getMedicines(){
@@ -108,6 +103,10 @@ export class PatientService extends ApiService {
     (error: Response) => {
       this.errorHandler(error);
     });
+  }
+
+  public getNoti(id){
+    return this.httpClient.get(`http://localhost:9090/pharmacist/notifications/`+id, this.HttpOptions);
   }
   private errorHandler(error: Response){
     if(error.status === 409){

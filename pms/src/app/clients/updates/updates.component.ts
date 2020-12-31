@@ -1,6 +1,14 @@
+
+import { PatientService } from 'src/app/services/patient/patient.service';
 import { Component, OnInit } from '@angular/core';
 import { Message } from 'src/app/patients/Message';
 import { ChatService } from 'src/app/services/webSocket/web-socket.service';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
+import { NotificationClass } from 'src/app/patients/NotificationClass';
 
 @Component({
   selector: 'app-updates',
@@ -9,24 +17,26 @@ import { ChatService } from 'src/app/services/webSocket/web-socket.service';
 })
 export class UpdatesComponent implements OnInit {
 
-  receivedMessages: Array<Message> = [];
-  idS:number;
+  receivedMessages: Array<NotificationClass> = [];
+  existingNotifications: Array<NotificationClass> = [];
+  notification: NotificationClass;
+  id:String = localStorage.getItem('id');
   msg1:string;
-  constructor( private chatService: ChatService) {
-    this.chatService.connect();
+  constructor( private chatService: ChatService,
+              private patientService: PatientService,
+              private _snackBar: MatSnackBar) {
+              this.chatService.connect();
 
-    chatService.getState().subscribe((msg) => {
+            chatService.getState().subscribe((msg) => {
       // this.receivedMessages.unshift({text: msg.substring(0,msg.indexOf("/"))});
-      this.receivedMessages.unshift({text: msg});
+    //  this.notification = new NotificationClass(msg, Date.now().toString())
+    var currentDate = new Date()
+    console.log(currentDate);
+      this.existingNotifications.unshift({content: msg, date: currentDate});
+    //   this._snackBar.open(msg, 'End now', {
+    //     duration: 1000,
+    //  });
    });
-       // let totalNotifications = 0;
-    // this.receivedMessages.forEach(function (value) {
-    //   console.log("dfdfdfdfdfdf");
-      
-    //   console.log(value);
-     
-    // });
-    
 
    }
 
@@ -36,6 +46,13 @@ export class UpdatesComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.patientService.getNoti(this.id).subscribe(response=>{
+      this.existingNotifications = <Object[]>response;
+      this.existingNotifications.reverse();
+      console.log(this.receivedMessages);
+    })
+    // this.patientService.getNotifications()
+
   }
 
 }

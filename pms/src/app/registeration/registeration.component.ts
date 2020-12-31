@@ -62,7 +62,7 @@ export class RegisterationComponent implements OnInit {
     {day: 5}
 
   ]
-  connect = this.chatService.connect();
+  // connect = this.chatService.connect();
 
   constructor(private patientService: PatientService,
               private router: Router,

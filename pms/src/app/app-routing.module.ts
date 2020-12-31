@@ -6,15 +6,13 @@ import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MedicineComponent } from './medicine/medicine.component';
-import { PatientsComponent } from './patients/patients.component';
-import { PharmacistComponent } from './pharmacist/pharmacist.component';
+import { PharmacistComponent } from './patients/pharmacist.component';
 import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
 
-  {path:'pharmacist', component: PharmacistComponent, canActivate:[AuthGuard]},
-  {path:'pharmacist/patients', component: PatientsComponent, canActivate:[AuthGuard]},
-  {path:'pharmacist/patients/:patientId', component: PatientsComponent, canActivate:[AuthGuard]},
+  {path:'pharmacist/patients', component: PharmacistComponent, canActivate:[AuthGuard]},
+  {path:'pharmacist/patients/:patientId', component: PharmacistComponent, canActivate:[AuthGuard]},
   {path:'pharmacist/medicines', component: MedicineComponent, canActivate:[AuthGuard]},
   {path:'client', component: ClientsComponent, canActivate:[AuthGuard]},
   {path: 'login', component: LoginComponent},

@@ -2,34 +2,36 @@
 <div class="container fadeInDown">
     <div id="formContent">
         <app-client-header></app-client-header>
-          <table class="table table-hover table-striped table-responsive-lg">
-            <thead>
-              <tr>
-                <th>Medicine name</th>
-                <th>Medicine Price</th>
-              </tr>
-            </thead>
-            <tbody>
-        
-              <!-- @slideInOut -->
-              <!--  -->
-        
-              <tr class="test" *ngFor="let p of medicines"
+        <table class="table table-striped table-responsive-lg ">
+          <thead>
+            <tr>
+              <th>Medicine </th>
+              <th>Price</th>
+              <th >Start Date</th>
+              <th >End Date</th>
+              <th >Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="test"  *ngFor="let p of medicines"
               [ngClass]="{'medicines' : true}">
-                    <td> {{p.medName}} </td>
-                    <td>{{p.price}} </td>
-                    <div *ngIf="p.active; else noMedicines">
-                     <button mdbBtn  style="background-color: green;">Active</button>
-                       </div>     
-                       <ng-template #noMedicines>
-                        <button mdbBtn  style="background-color: red;">False</button>
-                    </ng-template>
-                <!-- Here for exmple you can check if the medicine if active then change the button background color to green and make it disabled -->
-                
-              </tr>
-        
-            </tbody>
-          </table>
+              <td> {{p.medName}} </td>
+              <td>{{p.price}}$ </td>
+              <td>{{p.startDate}} </td>
+              <td>{{p.endDate}} </td>
+              <td>
+              <div *ngIf="p.active; else notActive">
+                <button disabled class="btn btn-success">{{p.managementId}}</button>
+              </div>
+              <ng-template #notActive>
+                <button disabled class="btn btn-danger">{{p.managementId}}</button>
+              </ng-template>
+            </td>
+          
+
+            </tr>
+          </tbody>
+        </table>
           
     </div>
 

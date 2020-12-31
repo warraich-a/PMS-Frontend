@@ -14,8 +14,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { PatientsComponent } from './patients/patients.component';
-import { PharmacistComponent } from './pharmacist/pharmacist.component';
+import { PharmacistComponent } from './patients/pharmacist.component';
 import { MedicineComponent } from './medicine/medicine.component';
 import { from } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -44,7 +43,6 @@ import {MatBadgeModule} from '@angular/material/badge';
 @NgModule({
   declarations: [
     AppComponent,
-    PatientsComponent,
     PharmacistComponent,
     MedicineComponent,
     LoginComponent,

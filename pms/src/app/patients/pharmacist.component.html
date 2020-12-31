@@ -122,7 +122,7 @@
                     <button disabled class="btn btn-danger">{{p.managementId}}</button>
                   </ng-template>
                 </td>
-                <button class="float-right" mat-icon-button (click)="removeMedicineOfPatient(p.managementId)">
+                <button class="float-right" mat-icon-button (click)="removeMedicineOfPatient(p.managementId, p.medName)">
                   <mat-icon>remove_circle_outline</mat-icon>
                 </button>
 
