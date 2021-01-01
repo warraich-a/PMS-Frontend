@@ -8,6 +8,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { MedicineComponent } from './medicine/medicine.component';
 import { PharmacistComponent } from './patients/pharmacist.component';
 import { AuthGuard } from './auth/auth.guard';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+
 
 const routes: Routes = [
 
@@ -20,6 +22,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterationComponent},
   {path: 'forbidden', component: ForbiddenComponent},
   {path:'client/updates', component: UpdatesComponent, canActivate:[AuthGuard]},
+  {path:'editProfile', component: EditProfileComponent, canActivate:[AuthGuard]},
 
 
 

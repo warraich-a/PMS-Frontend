@@ -1,13 +1,13 @@
 <app-header></app-header>
-<h1>
+<!-- <h1>
   WebSockets Demo
 </h1>
-<label for="message">send message: </label>
+<label for="message">send message: </label> -->
 <!-- <input id="message" type="text" [(ngModel)]="sentMessage" (keyup.enter)="sendMessage()"> -->
 
 <!-- <button (click)="sendMessage()">Send Message</button> -->
-<button (click)="disconnect()">Disconnect</button>
-<button (click)="connect()">Connect</button>
+<!-- <button (click)="disconnect()">Disconnect</button>
+<button (click)="connect()">Connect</button> -->
 
 
 
@@ -122,7 +122,7 @@
                     <button disabled class="btn btn-danger">{{p.managementId}}</button>
                   </ng-template>
                 </td>
-                <button class="float-right" mat-icon-button (click)="removeMedicineOfPatient(p.managementId, p.medName)">
+                <button class="float-right" mat-icon-button (click)="openDialogRemovePatientMedicine(p.managementId, p.medName)">
                   <mat-icon>remove_circle_outline</mat-icon>
                 </button>
 

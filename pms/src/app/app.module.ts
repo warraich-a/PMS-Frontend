@@ -38,6 +38,8 @@ import { UpdatesComponent } from './clients/updates/updates.component';
 import { FilterMedicinePipe } from './patients/pipe/medicine/filter-medicine.pipe';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatBadgeModule} from '@angular/material/badge';
+import { RemovePatientMedicineComponent } from './patients/remove-patient-medicine/remove-patient-medicine.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 // below we are mentioning that this is an ngmodule just like in components we tell 
 // it about the type of class above the export
 @NgModule({
@@ -60,7 +62,9 @@ import {MatBadgeModule} from '@angular/material/badge';
     ForbiddenComponent,
     ClientHeaderComponent,
     UpdatesComponent,
-    FilterMedicinePipe
+    FilterMedicinePipe,
+    RemovePatientMedicineComponent,
+    EditProfileComponent
   
   ],
   imports: [

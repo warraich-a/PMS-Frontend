@@ -1,0 +1,123 @@
+<app-nav-bar></app-nav-bar>
+<div class="container">
+    <form 
+    class="text-center"
+    #updatePatient="ngForm"
+    (ngSubmit)="onSubmitPatient(updatePatient.value)">
+    <h1 >Edit your data</h1>
+
+    <div class="row">
+         
+          <div class="col">
+                <h3>Basic Information</h3>
+                <mat-form-field   
+                class="input-full-width">
+                <input matInput type="text" 
+                name="firstName" 
+                disabled
+                ngModel = " {{patient?.firstName}}"
+                #firstName = "ngModel"
+                placeholder="First Name"> 
+          </mat-form-field>
+          <mat-form-field 
+                class="input-full-width" >
+                <input matInput type="text" 
+                name="lastName" 
+                disabled
+                ngModel = "{{patient?.lastName}}"
+                #lastName = "ngModel"
+                placeholder="Last Name"> 
+          </mat-form-field>
+          <mat-form-field 
+                class="input-full-width">
+                <input matInput 
+                      disabled 
+                      type="date" 
+                      name="dateOfBirth" 
+                      ngModel = {{patient?.dateOfBirth}}
+                      placeholder="Date Of Birth"
+                      style="width: 100%;">
+          </mat-form-field>
+          </div>
+          <div class="col">
+           <h4>Credentials</h4>
+          <mat-form-field 
+                class="input-full-width" >
+                <input matInput type="text" 
+                name="email" 
+                ngModel = "{{patient?.email}}"
+              #email = "ngModel"
+              placeholder="email"> 
+          </mat-form-field>
+          <br>
+          <mat-form-field 
+          matTooltip="Change your password"
+                class="input-full-width" >
+                <input matInput type="text" 
+                name="password" 
+                ngModel = "{{oldPassword}}"
+                #password = "ngModel"
+                placeholder="password"> 
+          </mat-form-field>
+          </div>
+    </div>
+    <h4>Adresss</h4>
+    <div class="row">
+          <div class="col">
+                <mat-form-field 
+                class="input-full-width" >
+                <input matInput type="text" 
+                name="streetName" 
+                ngModel = "{{patient?.streetName}}"
+                #streetName = "ngModel"
+                placeholder="Street Name"> 
+          </mat-form-field>
+        
+          <mat-form-field 
+                class="input-full-width" >
+                <input matInput type="text" 
+                name="houseNr" 
+                ngModel = "{{patient?.houseNr}}"
+                #houseNr = "ngModel"
+                placeholder="houseNr"> 
+          </mat-form-field>
+          </div>
+          <div class="col">
+                
+    
+        <mat-form-field 
+              class="input-full-width" >
+              <input matInput type="text" 
+              name="city" 
+              ngModel = "{{patient?.city}}"
+              #city = "ngModel"
+              placeholder="city"> 
+        </mat-form-field>
+        <mat-form-field 
+              class="input-full-width" >
+              <input matInput type="text" 
+              name="zipcode" 
+              ngModel = "{{patient?.zipcode}}"
+              #zipcode = "ngModel"
+              placeholder="zipcode"> 
+        </mat-form-field>
+
+        
+          <button 
+              mdbBtn 
+              type="submit"  
+              rounded="true" 
+              class="btn btn-success"
+              id="submitButton" > 
+              submit
+          </button>
+         
+          </div>
+    </div>
+</form>
+</div>
+
+
+      
+
+

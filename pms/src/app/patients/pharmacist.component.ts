@@ -23,6 +23,7 @@ import { DialogDeletePatientComponent } from './dialog-delete-patient/dialog-del
 import {MatTableDataSource} from '@angular/material/table';
 import { ChatService } from '../services/webSocket/web-socket.service';
 import { Message } from './Message';
+import { RemovePatientMedicineComponent } from './remove-patient-medicine/remove-patient-medicine.component';
 
 @Component({
   selector: 'app-patients',
@@ -186,7 +187,7 @@ connect(): void {
       
     },
     (error: Response) => {
-   
+      this.errorHandler(error);
     });
   };
 
@@ -249,19 +250,17 @@ connect(): void {
     });
   }
 
-  removeMedicineOfPatient(medId, medName){
-
-    this.patientService.removeMedicinePatient(this.patientIdToAddMed, medId);
-    var obj = {
-      "patientId": this.patientIdToAddMed,
-      "content": "A medicine name "+medName+" is removed"
-    }
-    var myJSON = JSON.stringify(obj);
-
-    this.sendMessage(myJSON);
-
-
-    console.log(this.medicineToAdd);
+  openDialogRemovePatientMedicine(id, medName): void {
+    const dialogRef = this.dialog.open(RemovePatientMedicineComponent, {
+      // width: '30%',
+      data: {medId: id, medName: medName, patientId: this.patientIdToAddMed},
+      panelClass: 'custom-modalbox'
+    }); 
+    dialogRef.afterClosed()
+      .subscribe(res => {
+        this.getAllPatients();
+        this.ngOnInit();
+    });
   }
 
   private errorHandler(error: Response){
@@ -272,7 +271,11 @@ connect(): void {
       this._snackBar.open('Not Found!!', 'End now', {
         duration: 1000,
      });
-    } 
+    } else if(error.status === 409){
+      this._snackBar.open('This medicine already exist', 'End now', {
+        duration: 5000,
+      });
+    }
     else 
     {
       this._snackBar.open('Wrong data provided', 'End now', {
